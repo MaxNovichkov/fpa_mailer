@@ -48,6 +48,7 @@ public class Activator extends AbstractUIPlugin {
 		return plugin;
 	}
 
+	
 	/**
 	 * Returns an image descriptor for the image file at the given
 	 * plug-in relative path
