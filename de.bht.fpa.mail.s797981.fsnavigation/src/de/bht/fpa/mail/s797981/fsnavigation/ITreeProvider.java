@@ -1,5 +1,6 @@
 package de.bht.fpa.mail.s797981.fsnavigation;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,31 +19,30 @@ public abstract class ITreeProvider {
 	 */
 	List<ITreeProvider> children;
 	/**
-	 * Name of file or folder
-	 */
-	String name;
-	/**
 	 * Specified path for file or folder image icon
 	 */
 	String imagePath;
+	/**
+	 * Path for file or folder
+	 */
+	String absolutePath;
 	
-	public ITreeProvider(String name) {
-		this.name = name;
+	public ITreeProvider(String absolutePath) {
+		this.absolutePath = absolutePath;
 		this.children = new ArrayList<ITreeProvider>();
 	}
 	
 	public abstract void addChild(ITreeProvider p);
 	
 	public String getName() {
-		return name;
-	}
+	    File file = new File(absolutePath);
+	    return file.getName();
+	  }
 
 	public Image getImage() {
 		return Activator.imageDescriptorFromPlugin(Activator.PLUGIN_ID,
 				imagePath).createImage();
 	}
 	
-	public ITreeProvider[] getChildren() {
-		return children.toArray(new ITreeProvider[0]);
-	}
+	public abstract ITreeProvider[] getChildren();
 }

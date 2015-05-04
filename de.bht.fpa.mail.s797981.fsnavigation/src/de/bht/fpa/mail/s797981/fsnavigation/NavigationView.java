@@ -15,6 +15,7 @@ public class NavigationView extends ViewPart{
 	   */
 	  @Override
 	  public void createPartControl(Composite parent) {
+		  
 	   /** a TreeViewer is a Jface widget, which shows trees
 		*/
 	    viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.BORDER);
@@ -39,8 +40,6 @@ public class NavigationView extends ViewPart{
 	   * Set up a model to initialize tree hierarchy.
 	   */
 	  private Object createModel() {
-	    // Our root item is simply a dummy Object. Here you need to provide your own
-	    // root class.
 	    // return new MyDirectory(System.getProperty("user.dir"));
 	    return new IDirectory("C://");
 	  }
