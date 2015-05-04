@@ -2,11 +2,16 @@ package de.bht.fpa.mail.s797981.fsnavigation;
 
 import java.io.File;
 
+/**
+ * 
+ * @author Max
+ *
+ */
 public class IDirectory extends ITreeProvider {
 
 	public IDirectory(String absolutePath) {
 		super(absolutePath);
-		this.imagePath = "icons/woman.png";
+		this.imagePath = "icons/folder_s.png";
 	}
 
 	/**

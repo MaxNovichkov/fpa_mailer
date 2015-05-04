@@ -4,7 +4,7 @@ public class IFile extends ITreeProvider{
 
 	public IFile(String absolutePath) {
 		super(absolutePath);
-		this.imagePath = "icons/man.png";
+		this.imagePath = "icons/file_sm.png";
 	}
 
 	/**
