@@ -1,8 +1,6 @@
 package de.bht.fpa.mail.s797981.fsnavigation;
 
 import java.io.File;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 public class IDirectory extends ITreeProvider {
 
@@ -23,7 +21,7 @@ public class IDirectory extends ITreeProvider {
 	}
 	
 	/**
-	 * Returns an array with files and folder
+	 * Returns an array with files and folders or empty array for folder if no files in it
 	 */
 	public ITreeProvider[] getChildren() {
 		File file = new File(absolutePath);
@@ -32,19 +30,14 @@ public class IDirectory extends ITreeProvider {
 			return new ITreeProvider[0];
 		}
 
-		ArrayList<ITreeProvider> directoriesandfiles = new ArrayList<ITreeProvider>();
+		ITreeProvider[] directoriesandfiles = new ITreeProvider[files.length];
 		for (int i = 0; i < files.length; i++) {
 			if (files[i].isDirectory()) {
-				directoriesandfiles.add(new IDirectory(files[i].getAbsolutePath()));
+				directoriesandfiles[i] = new IDirectory(files[i].getAbsolutePath());
 			} else {
-				directoriesandfiles.add(new IFile(files[i].getAbsolutePath()));
+				directoriesandfiles[i] = new IFile(files[i].getAbsolutePath());
 			}
 		}
-
-		ITreeProvider[] result = new ITreeProvider[directoriesandfiles.size()];
-		for (int i = 0; i < directoriesandfiles.size(); i++) {
-			result[i] = directoriesandfiles.get(i);
-		}
-		return result;
+		return directoriesandfiles;
 	}
 }
