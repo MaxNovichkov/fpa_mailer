@@ -7,8 +7,8 @@ public class TreeLabelProvider extends LabelProvider {
 
 	@Override
 	public String getText(Object element) {
-		if (element instanceof ITreeProvider){
-			ITreeProvider p = (ITreeProvider)element;
+		if (element instanceof IAbstractTree){
+			IAbstractTree p = (IAbstractTree)element;
 			return p.getName();
 		}
 		return super.getText(element);
@@ -16,8 +16,8 @@ public class TreeLabelProvider extends LabelProvider {
 	
 	@Override
 	public Image getImage(Object element) {
-		if (element instanceof ITreeProvider){
-			ITreeProvider p = (ITreeProvider)element;
+		if (element instanceof IAbstractTree){
+			IAbstractTree p = (IAbstractTree)element;
 			return p.getImage();
 		}
 		return super.getImage(element);

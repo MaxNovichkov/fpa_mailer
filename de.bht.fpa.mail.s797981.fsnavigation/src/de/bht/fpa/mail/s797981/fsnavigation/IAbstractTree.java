@@ -13,36 +13,42 @@ import org.eclipse.swt.graphics.Image;
  * @author Maxim Novichkov
  *
  */
-public abstract class ITreeProvider {
-	/**
-	 * This list will be used to store children
-	 */
-	List<ITreeProvider> children;
+//TODO: comments
+
+public abstract class IAbstractTree {
+	
 	/**
 	 * Specified path for file or folder image icon
 	 */
-	String imagePath;
+	protected String imagePath;
 	/**
 	 * Path for file or folder
 	 */
-	String absolutePath;
+	protected final String absolutePath;
+
+	private final File file;
 	
-	public ITreeProvider(String absolutePath) {
+	public IAbstractTree(String absolutePath) {
+		File file = new File(absolutePath);
+		if(!file.exists()){
+			throw new IllegalArgumentException("File with path" + absolutePath + "not exist");
+		}
+		this.file = file;
 		this.absolutePath = absolutePath;
-		this.children = new ArrayList<ITreeProvider>();
 	}
 	
-	public abstract void addChild(ITreeProvider p);
-	
 	public String getName() {
-	    File file = new File(absolutePath);
 	    return file.getName();
 	  }
 
 	public Image getImage() {
-		return Activator.imageDescriptorFromPlugin(Activator.PLUGIN_ID,
-				imagePath).createImage();
+		return Activator.imageDescriptorFromPlugin(Activator.PLUGIN_ID,	imagePath).createImage();
 	}
 	
-	public abstract ITreeProvider[] getChildren();
+	/**
+	 * Returns an empty array if no children there
+	 */
+	public Object[] getChildren(){
+		return new Object[0];
+	};
 }

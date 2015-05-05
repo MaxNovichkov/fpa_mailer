@@ -41,7 +41,7 @@ public class NavigationView extends ViewPart{
 	   */
 	  private Object createModel() {
 	    // return new MyDirectory(System.getProperty("user.dir"));
-	    return new IDirectory("C://");
+	    return new ITreeDirectory("C://");
 	  }
 
 	  /**
