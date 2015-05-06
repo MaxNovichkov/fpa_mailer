@@ -1,20 +1,15 @@
 package de.bht.fpa.mail.s797981.fsnavigation;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.eclipse.swt.graphics.Image;
 
 /**
- * This abstract class contains general methods for working with .....file system. Specific methods implemented in 
- * corresponding classes.
+ * This abstract class represent a wrapper class for java.io.File and contains methods for working with 
+ * it representation such as file and directory. Specific methods implemented in corresponding classes.
  * 
  * @author Maxim Novichkov
- *
  */
-//TODO: comments
-
 public abstract class IAbstractTree {
 	
 	/**
@@ -24,31 +19,75 @@ public abstract class IAbstractTree {
 	/**
 	 * Path for file or folder
 	 */
-	protected final String absolutePath;
-
-	private final File file;
-	
-	public IAbstractTree(String absolutePath) {
-		File file = new File(absolutePath);
+	protected final String path;
+	/**
+	 * File specified by path
+	 */
+	protected final File file;
+	/**
+	 * Constructor with checking if this path exist  
+	 * @param path The specified path
+	 */
+	public IAbstractTree(String path) {
+		File file = new File(path);
 		if(!file.exists()){
-			throw new IllegalArgumentException("File with path" + absolutePath + "not exist");
+			throw new IllegalArgumentException("File with path " + path + " not exist");
 		}
 		this.file = file;
-		this.absolutePath = absolutePath;
-	}
-	
-	public String getName() {
-	    return file.getName();
-	  }
-
-	public Image getImage() {
-		return Activator.imageDescriptorFromPlugin(Activator.PLUGIN_ID,	imagePath).createImage();
+		this.path = path;
 	}
 	
 	/**
-	 * Returns an empty array if no children there
+	 * Returns an empty array if it's instance of file 
+	 * @return An empty array
 	 */
 	public Object[] getChildren(){
 		return new Object[0];
 	};
+	
+	public String getName() {
+		return file.getName();
+	}
+	
+	public Image getImage() {
+		return Activator.imageDescriptorFromPlugin(Activator.PLUGIN_ID,	imagePath).createImage();
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((file == null) ? 0 : file.hashCode());
+		result = prime * result
+				+ ((imagePath == null) ? 0 : imagePath.hashCode());
+		result = prime * result + ((path == null) ? 0 : path.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		IAbstractTree other = (IAbstractTree) obj;
+		if (file == null) {
+			if (other.file != null)
+				return false;
+		} else if (!file.equals(other.file))
+			return false;
+		if (imagePath == null) {
+			if (other.imagePath != null)
+				return false;
+		} else if (!imagePath.equals(other.imagePath))
+			return false;
+		if (path == null) {
+			if (other.path != null)
+				return false;
+		} else if (!path.equals(other.path))
+			return false;
+		return true;
+	}
 }
