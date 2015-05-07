@@ -5,17 +5,14 @@ import org.eclipse.jface.viewers.Viewer;
 
 public class TreeContentProvider implements ITreeContentProvider {
 
-	
-
 	@Override
 	public Object[] getChildren(Object parentElement) {
 		if (parentElement instanceof IAbstractTree){
 			IAbstractTree p = (IAbstractTree)parentElement;
 			return p.getChildren();
 		}
-		return null;
+		return new Object[0];
 	}
-
 
 	@Override
 	public boolean hasChildren(Object element) {
