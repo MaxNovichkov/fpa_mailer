@@ -4,6 +4,4 @@ public interface ICommand {
 	
 	void execute();
 
-	void set(String path);
-
 }

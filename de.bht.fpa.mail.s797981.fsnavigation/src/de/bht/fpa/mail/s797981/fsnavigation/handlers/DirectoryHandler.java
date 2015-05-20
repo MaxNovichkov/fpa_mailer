@@ -12,11 +12,14 @@ import org.eclipse.ui.handlers.HandlerUtil;
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
-public class SetBaseDirHandler extends AbstractHandler {
+public class DirectoryHandler extends AbstractHandler {
+	
+	private ICommand command;
+	
 	/**
 	 * The constructor.
 	 */
-	public SetBaseDirHandler() {
+	public DirectoryHandler() {
 	}
 
 	/**
@@ -25,12 +28,13 @@ public class SetBaseDirHandler extends AbstractHandler {
 	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
-		DirectoryDialog d = new DirectoryDialog(window.getShell());
-		String path = d.open();
-		System.out.println(path);
-		
-//		execute.set(path);
-		
+		DirectoryDialog dialog = new DirectoryDialog(window.getShell());
+		String filename = dialog.open();
+		if (filename == null) {
+		      return null;
+		    }
+		command = new SetDirectoryCommand(filename);
+		command.execute();
 		return null;
 	}
 }

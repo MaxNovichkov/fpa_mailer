@@ -7,7 +7,7 @@ import org.eclipse.swt.SWT;
 
 public class NavigationView extends ViewPart{
 	public static final String ID = "de.bht.fpa.s797981.fsnavigation.NavigationView";
-	 private TreeViewer viewer;
+	 private static TreeViewer viewer;
 	  
 	 /**
 	   * This is a callback that will allow us to create the viewer and initialize
@@ -40,8 +40,8 @@ public class NavigationView extends ViewPart{
 	   * Set up a model to initialize tree hierarchy.
 	   */
 	  private Object createModel() {
-	    // return new MyDirectory(System.getProperty("user.dir"));
-	    return new ITreeDirectory("C://");
+	    // return new ITreeDirectory(System.getProperty("user.dir"));
+	    return new ITreeDirectory("c://");
 	  }
 
 	  /**
@@ -50,6 +50,10 @@ public class NavigationView extends ViewPart{
 	  @Override
 	  public void setFocus() {
 	    viewer.getControl().setFocus();
+	  }
+	  
+	  public static TreeViewer getInstance(){
+		return viewer;	  
 	  }
 
 }

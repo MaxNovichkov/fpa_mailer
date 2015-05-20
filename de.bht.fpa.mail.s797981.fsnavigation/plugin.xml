@@ -37,7 +37,7 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="de.bht.fpa.mail.s797981.fsnavigation.handlers.SetBaseDirHandler"
+            class="de.bht.fpa.mail.s797981.fsnavigation.handlers.DirectoryHandler"
             commandId="de.bht.fpa.mail.s797981.fsnavigation.commands.sampleCommand">
       </handler>
    </extension>
