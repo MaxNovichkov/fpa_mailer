@@ -14,7 +14,7 @@ public class ITreeFile extends IAbstractTree{
 	 * Construct a new ITreeFile with icon 
 	 * @param path The specified path
 	 */
-	public ITreeFile(String path) {
+	public ITreeFile(final String path) {
 		super(path);
 		this.imagePath = FILE_PATH;
 	}
