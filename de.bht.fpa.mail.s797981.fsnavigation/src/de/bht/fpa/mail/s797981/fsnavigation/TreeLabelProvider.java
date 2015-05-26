@@ -4,7 +4,7 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 
 /**
- * This class provide name and image of selected tree item element. In this case
+ * This class provide name and image of selected tree item (ITreeDIrectory) element. In this case
  * provided element will be wrapped in ITreeElement.
  *
  */

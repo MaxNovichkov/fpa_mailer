@@ -10,7 +10,7 @@ import org.eclipse.jface.viewers.Viewer;
 public class TreeContentProvider implements ITreeContentProvider {
 
 	/**
-	 * By clicking on the tree node item, this method return children of the
+	 * By clicking on the tree node (ITreeDirectory) item, this method return children of the
 	 * selected element.
 	 * 
 	 * @param Selected element

@@ -1,5 +1,8 @@
 package de.bht.fpa.mail.s797981.fsnavigation;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
@@ -11,7 +14,7 @@ import org.eclipse.swt.SWT;
  * @author Max
  *
  */
-public class NavigationView extends ViewPart {
+public class NavigationView extends ViewPart implements Observer{
 	public static final String ID = "de.bht.fpa.s797981.fsnavigation.NavigationView";
 	private static TreeViewer viewer;
 
@@ -48,6 +51,10 @@ public class NavigationView extends ViewPart {
 		 * data when the user expands tree items.
 		 */
 		viewer.setInput(createModel());
+		/**
+		 * Register observer to observe changes on SimpleRoot
+		 */
+		SimpleRoot.getInstance().addObserver(this);
 	}
 
 	/**
@@ -64,14 +71,12 @@ public class NavigationView extends ViewPart {
 	public void setFocus() {
 		viewer.getControl().setFocus();
 	}
-
 	/**
-	 * Access to the instance of this class
-	 * 
-	 * @return Instance of class
+	 * We want update navigation view if path in SimpleRoot was changed by user. 
+	 * We use observer pattern for this.
 	 */
-	public static TreeViewer getInstance() {
-		return viewer;
+	@Override
+	public void update(Observable o, Object directory) {
+		viewer.setInput(directory);
 	}
-
 }

@@ -15,7 +15,9 @@ import org.eclipse.ui.handlers.HandlerUtil;
  * @see org.eclipse.core.commands.AbstractHandler
  */
 public class DirectoryHandler extends AbstractHandler {
-	
+	/**
+	 * Command 
+	 */
 	private ICommand command;
 	
 	/**
@@ -26,7 +28,7 @@ public class DirectoryHandler extends AbstractHandler {
 
 	/**
 	 * the command has been executed, so extract extract the needed information
-	 * from the application context. Selected by user path will be wrapped in the command.
+	 * from the application context. Selected by user path will be wrapped in the command object.
 	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);

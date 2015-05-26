@@ -41,8 +41,7 @@ public class ITreeDirectory extends IAbstractTree {
 	}
 
 	/**
-	 * Returns an array with files and folders or empty array for folder if no
-	 * files in it
+	 * Returns an array with folders.
 	 * 
 	 * @return Array with folders and files
 	 */
@@ -62,7 +61,7 @@ public class ITreeDirectory extends IAbstractTree {
 	}
 
 	/**
-	 * Check the directory if there some messages in xml format exist and return
+	 * Check the directory if there some messages in specified xml format exist and return
 	 * list with this messages.
 	 * 
 	 * @return List with messages
