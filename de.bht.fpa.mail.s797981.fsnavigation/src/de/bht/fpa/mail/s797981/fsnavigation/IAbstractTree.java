@@ -25,15 +25,11 @@ public abstract class IAbstractTree {
 	 */
 	protected final File file;
 	/**
-	 * Constructor with checking if this path exist  
+	 * Construct {@link IAbstractTree} 
 	 * @param path The specified path
 	 */
 	public IAbstractTree(String path) {
-		File file = new File(path);
-		if(!file.exists()){
-			throw new IllegalArgumentException("File with path " + path + " not exist");
-		}
-		this.file = file;
+		this.file = new File(path);
 		this.path = path;
 	}
 	

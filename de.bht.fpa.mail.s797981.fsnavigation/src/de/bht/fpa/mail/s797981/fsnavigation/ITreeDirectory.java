@@ -93,6 +93,13 @@ public class ITreeDirectory extends IAbstractTree {
 		}
 		return messages;
 	}
+	/**
+	 * Check if this {@link ITreeDirectory} exist
+	 * @return True if exist
+	 */
+	public boolean exists(){
+		return this.file.exists();
+ 	}
 
 	@Override
 	public String toString() {

@@ -9,9 +9,9 @@ import org.eclipse.ui.part.ViewPart;
 import org.eclipse.swt.SWT;
 
 /**
- * Receiver
  * 
- * @author Max
+ * This class represent navigation view. 
+ * Is a receiver in command pattern.
  *
  */
 public class NavigationView extends ViewPart implements Observer{
