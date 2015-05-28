@@ -2,7 +2,6 @@ package de.bht.fpa.mail.s797981.fsnavigation;
 
 import java.util.Observable;
 import java.util.Observer;
-
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
@@ -52,7 +51,7 @@ public class NavigationView extends ViewPart implements Observer{
 		 */
 		viewer.setInput(createModel());
 		/**
-		 * Register observer to observe changes on SimpleRoot
+		 * Register observer to observe changes on SimpleRoot.
 		 */
 		SimpleRoot.getInstance().addObserver(this);
 	}
