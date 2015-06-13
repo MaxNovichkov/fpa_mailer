@@ -9,3 +9,4 @@ Require-Bundle: org.eclipse.ui,
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: de.bht.fpa.mail.s000000.common.mail.model
+Export-Package: de.bht.fpa.mail.s797981.fsnavigation

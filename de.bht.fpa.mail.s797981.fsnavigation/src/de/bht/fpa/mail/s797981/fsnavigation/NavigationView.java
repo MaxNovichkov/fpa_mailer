@@ -54,6 +54,8 @@ public class NavigationView extends ViewPart implements Observer{
 		 * Register observer to observe changes on SimpleRoot.
 		 */
 		SimpleRoot.getInstance().addObserver(this);
+		
+		getSite().setSelectionProvider(viewer);
 	}
 
 	/**

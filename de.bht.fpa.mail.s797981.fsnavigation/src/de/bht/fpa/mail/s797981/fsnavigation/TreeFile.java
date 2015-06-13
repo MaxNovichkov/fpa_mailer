@@ -5,7 +5,7 @@ package de.bht.fpa.mail.s797981.fsnavigation;
  * 
  * @author Maxim Novichkov
  */
-public class ITreeFile extends IAbstractTree{
+public class TreeFile extends IAbstractTree{
 	/**
 	 * Path to the file icon
 	 */
@@ -14,7 +14,7 @@ public class ITreeFile extends IAbstractTree{
 	 * Construct a new ITreeFile with icon 
 	 * @param path The specified path
 	 */
-	public ITreeFile(final String path) {
+	public TreeFile(final String path) {
 		super(path);
 		this.imagePath = FILE_PATH;
 	}

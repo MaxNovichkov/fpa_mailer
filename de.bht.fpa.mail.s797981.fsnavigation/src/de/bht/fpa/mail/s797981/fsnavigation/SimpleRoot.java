@@ -22,7 +22,7 @@ public class SimpleRoot extends Observable {
 	/**
 	 * Default location
 	 */
-	private ITreeDirectory directory = new ITreeDirectory(
+	private TreeDirectory directory = new TreeDirectory(
 			System.getProperty("user.home"));
 	/**
 	 * File to save location
@@ -48,7 +48,7 @@ public class SimpleRoot extends Observable {
 	 * 
 	 * @return ITreeDirectory root
 	 */
-	public ITreeDirectory getRoot() {
+	public TreeDirectory getRoot() {
 		return directory;
 	}
 
@@ -60,7 +60,7 @@ public class SimpleRoot extends Observable {
 	 */
 	public void setRoot(final String path) {
 		saveRoot(path);
-		directory = new ITreeDirectory(path);
+		directory = new TreeDirectory(path);
 		setChanged();
 		notifyObservers(directory);
 	}
@@ -93,13 +93,13 @@ public class SimpleRoot extends Observable {
 	 * 
 	 * @return Settled location
 	 */
-	private ITreeDirectory readRoot() {
+	private TreeDirectory readRoot() {
 		Scanner fin = null;
-		ITreeDirectory result = null;
+		TreeDirectory result = null;
 		try {
 			fin = new Scanner(history);
 			while (fin.hasNextLine()) {
-				result = new ITreeDirectory(fin.nextLine().replace("\\", "/"));
+				result = new TreeDirectory(fin.nextLine().replace("\\", "/"));
 				if (!result.exists()) {
 					return directory;
 				}

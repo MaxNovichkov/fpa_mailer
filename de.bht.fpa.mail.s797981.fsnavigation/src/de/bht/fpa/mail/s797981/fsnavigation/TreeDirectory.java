@@ -15,7 +15,7 @@ import de.bht.fpa.mail.s000000.common.mail.model.Message;
  * 
  * @author Maxim Novichkov
  */
-public class ITreeDirectory extends IAbstractTree {
+public class TreeDirectory extends IAbstractTree {
 	/**
 	 * Path to the folder icon
 	 */
@@ -26,7 +26,7 @@ public class ITreeDirectory extends IAbstractTree {
 	 * 
 	 * @param path The specified path
 	 */
-	public ITreeDirectory(final String path) {
+	public TreeDirectory(final String path) {
 		super(path);
 		this.imagePath = FOLDER_PATH;
 	}
@@ -51,10 +51,10 @@ public class ITreeDirectory extends IAbstractTree {
 			return new Object[0];
 		}
 
-		final ArrayList<ITreeDirectory> directory = new ArrayList<ITreeDirectory>();
+		final ArrayList<TreeDirectory> directory = new ArrayList<TreeDirectory>();
 		for (File item : files) {
 			if (item.isDirectory()) {
-				directory.add(new ITreeDirectory(item.getPath()));
+				directory.add(new TreeDirectory(item.getPath()));
 			}
 		}
 		return directory.toArray();
@@ -94,7 +94,7 @@ public class ITreeDirectory extends IAbstractTree {
 		return messages;
 	}
 	/**
-	 * Check if this {@link ITreeDirectory} exist
+	 * Check if this {@link TreeDirectory} exist
 	 * @return True if exist
 	 */
 	public boolean exists(){
