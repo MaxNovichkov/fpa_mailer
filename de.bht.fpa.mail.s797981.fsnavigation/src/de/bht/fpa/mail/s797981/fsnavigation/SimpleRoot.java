@@ -27,7 +27,7 @@ public class SimpleRoot extends Observable {
 	/**
 	 * File to save location
 	 */
-	private final File history = new File(System.getProperty("user.home") + "\\fpa_mailer_path");
+	private final File history = new File(System.getProperty("user.home") + "/fpa_mailer_path");
 	/**
 	 * Instance of this class
 	 */
@@ -79,7 +79,6 @@ public class SimpleRoot extends Observable {
 			out.println(path);
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("Write error");
 		} finally {
 			if (out != null) {
 				out.close();

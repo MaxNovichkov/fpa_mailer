@@ -47,7 +47,7 @@
             commandId="de.bht.fpa.mail.s797981.fsnavigation.commands.sampleCommand"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="M1+B">
+            sequence="M1+b">
       </key>
    </extension>
    <extension

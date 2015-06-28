@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.startup">
+         <view
+            class="de.bht.fpa.mail.s797981.startup.MyStartup"
+            id="de.bht.fpa.mail.s797981.startup.view1"
+            name="MyStartup"
+            restorable="true">
+      </view>
+   </extension>
+
+</plugin>

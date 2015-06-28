@@ -41,6 +41,14 @@ public abstract class IAbstractTree {
 		return new Object[0];
 	};
 	
+	/**
+	 * Returns path of tree
+	 * @return The path of selected element
+	 */
+	public String getPath() {
+		return path;
+	}
+	
 	public String getName() {
 		return file.getName();
 	}

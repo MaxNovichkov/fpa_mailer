@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               id="de.bht.fpa.mail.s797981.filter.menus.sampleMenu"
+               label="Filter"
+               mnemonic="M">
+            <command
+                  commandId="de.bht.fpa.mail.s797981.filter.commands.sampleCommand"
+                  id="de.bht.fpa.mail.s797981.filter.menus.sampleCommand"
+                  mnemonic="R"
+                  tooltip="Here you can set your filter">
+            </command>
+          <command
+                commandId="de.bht.fpa.mail.s797981.filter.commands.clear"
+                id="de.bht.fpa.mail.s797981.filter.menus.clear"
+                label="Clear"
+                mnemonic="C">
+            </command>
+         </menu>
+      </menuContribution>
+     
+   </extension>
+   
+    <extension
+         point="org.eclipse.ui.commands">
+      <category
+            id="de.bht.fpa.mail.s797981.filter.commands.category"
+            name="Sample Category">
+      </category>
+      <command
+            categoryId="de.bht.fpa.mail.s797981.filter.commands.category"
+            id="de.bht.fpa.mail.s797981.filter.commands.sampleCommand"
+            name="Configure">
+      </command>
+      <command
+            categoryId="de.bht.fpa.mail.s797981.filter.commands.category"
+            id="de.bht.fpa.mail.s797981.filter.commands.sampleCommand"
+            name="Clear">
+      </command>
+   </extension>
+   
+   
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="de.bht.fpa.mail.s797981.filter.handlers.SetFilterHandler"
+            commandId="de.bht.fpa.mail.s797981.filter.commands.sampleCommand">
+      </handler>
+      <handler
+            class="de.bht.fpa.mail.s797981.filter.handlers.ResetFilterHandler"
+            commandId="de.bht.fpa.mail.s797981.filter.handlers.clear">
+      </handler>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="de.bht.fpa.mail.s797981.filter.commands.sampleCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+f">
+      </key>
+      
+       
+   </extension>
+      	  
+	
+</plugin>
