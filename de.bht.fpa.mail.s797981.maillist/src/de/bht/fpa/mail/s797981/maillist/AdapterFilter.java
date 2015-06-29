@@ -1,26 +1,20 @@
-package de.bht.fpa.mail.s797981.filter;
-import java.util.LinkedList;
-import java.util.List;
-
+package de.bht.fpa.mail.s797981.maillist;
+import java.util.HashSet;
+import java.util.Set;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
-
-import de.bht.fpa.mail.s000000.common.filter.FilterCombination;
-import de.bht.fpa.mail.s000000.common.filter.FilterDialog;
-import de.bht.fpa.mail.s000000.common.filter.FilterOperator;
-import de.bht.fpa.mail.s000000.common.filter.FilterType;
-import de.bht.fpa.mail.s000000.common.mail.model.Importance;
+import de.bht.fpa.mail.s000000.common.filter.IFilter;
 import de.bht.fpa.mail.s000000.common.mail.model.Message;
 
-public class FactoryAdapterFilter extends ViewerFilter{
+public class AdapterFilter extends ViewerFilter{
 	
-		  private AFilter filter;
+		  private IFilter filter;
 
-		  public FactoryAdapterFilter(AFilter filter) {
+		  public AdapterFilter(IFilter filter) {
 		    this.filter = filter;
 		  }
 
-		  public void setFilter(AFilter filter) {
+		  public void setFilter(IFilter filter) {
 		    this.filter = filter;
 		  }
 
@@ -35,7 +29,10 @@ public class FactoryAdapterFilter extends ViewerFilter{
 	     */
 	@Override
 	public boolean select(Viewer viewer, Object parentElement, Object element) {
-		return filter.match((Message) element);
+//		return filter.match((Message) element);
+		Set<Message> result = new HashSet<Message>();
+	    result.add((Message) element);
+	    return !filter.filter(result).isEmpty();
 	}
 	
 //	public AFilter getFilter() {

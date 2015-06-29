@@ -1,6 +1,8 @@
 package de.bht.fpa.mail.s797981.filter;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import de.bht.fpa.mail.s000000.common.filter.FilterOperator;
 import de.bht.fpa.mail.s000000.common.filter.StringCompareHelper;
@@ -20,15 +22,20 @@ public class RecipientsFilter extends AStringFilter {
 	}
 
 	@Override
-	boolean match(Message message) {
-		for (Recipient recipient : message.getRecipients()) {
-			if(StringCompareHelper.matches(recipient.getEmail().toLowerCase(), searchedString, operator)
-			|| StringCompareHelper.matches(recipient.getPersonal().toLowerCase(), searchedString, operator)){
-				return true;
-			}
-		}
-		return false;
-	}
+	  public Set<Message> filter(Iterable<Message> messagesToFilter) {
+	    Set<Message> result = new HashSet<Message>();
+	    for (Message message : messagesToFilter) {
+	      List<Recipient> recipients = message.getRecipients();
+	      for (Recipient recipient : recipients) {
+	        if (StringCompareHelper.matches(recipient.getEmail().toLowerCase(), searchedString, operator)
+	            || StringCompareHelper.matches(recipient.getPersonal().toLowerCase(), searchedString, operator)) {
+	          result.add(message);
+	          continue;
+	        }
+	      }
+	    }
+	    return result;
+	  }
 
 	@Override
 	public String toString() {

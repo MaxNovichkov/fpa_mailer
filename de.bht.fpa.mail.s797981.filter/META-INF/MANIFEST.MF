@@ -8,7 +8,8 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  de.ralfebert.rcputils,
  org.junit,
- org.eclipse.jface
+ org.eclipse.jface,
+ org.eclipse.equinox.registry
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: de.bht.fpa.mail.s000000.common.filter,

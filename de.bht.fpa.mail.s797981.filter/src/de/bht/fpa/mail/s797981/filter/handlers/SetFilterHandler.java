@@ -6,21 +6,14 @@ import java.util.List;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.swt.widgets.DirectoryDialog;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.handlers.HandlerUtil;
-
 import de.bht.fpa.mail.s000000.common.filter.FilterCombination;
 import de.bht.fpa.mail.s000000.common.filter.FilterDialog;
-import de.bht.fpa.mail.s000000.common.filter.FilterGroupType;
 import de.bht.fpa.mail.s000000.common.filter.FilterOperator;
 import de.bht.fpa.mail.s000000.common.filter.FilterType;
 import de.bht.fpa.mail.s000000.common.filter.IFilter;
 import de.bht.fpa.mail.s000000.common.mail.model.Importance;
-import de.bht.fpa.mail.s797981.filter.AFilter;
-import de.bht.fpa.mail.s797981.filter.FactoryAdapterFilter;
 import de.bht.fpa.mail.s797981.filter.ImportanceFilter;
 import de.bht.fpa.mail.s797981.filter.IntersectionFilter;
 import de.bht.fpa.mail.s797981.filter.ReadFilter;
@@ -46,7 +39,7 @@ public class SetFilterHandler extends AbstractHandler {
 		
 //		return FactoryAdapterFilter.createFilter(filterCombinations, filterDialog);
 		
-		List<AFilter> filters = new LinkedList<AFilter>();
+		List<IFilter> filters = new LinkedList<IFilter>();
 		for (FilterCombination filterCombination : filterCombinations) {
 			final FilterType filterType = filterCombination.getFilterType();
 			final FilterOperator filterOperator = filterCombination.getFilterOperator();
@@ -80,11 +73,11 @@ public class SetFilterHandler extends AbstractHandler {
 			switch (filterDialog.getFilterGroupType()) {
 			case INTERSECTION:
 				System.out.println("INTERSECTION");
-				return new IntersectionFilter(filters.toArray(new AFilter[filters.size()]));
+				return new IntersectionFilter(filters.toArray(new IFilter[filters.size()]));
 
 			case UNION:
 				System.out.println("UNION");
-				return new UnionFilter(filters.toArray(new AFilter[filters.size()]));
+				return new UnionFilter(filters.toArray(new IFilter[filters.size()]));
 			default:
 				return null;
 			}

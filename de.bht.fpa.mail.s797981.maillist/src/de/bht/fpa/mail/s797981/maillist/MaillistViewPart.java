@@ -21,7 +21,6 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.commands.ICommandService;
 import org.eclipse.ui.part.ViewPart;
-
 import de.bht.fpa.mail.s000000.common.mail.model.Message;
 import de.bht.fpa.mail.s797981.fsnavigation.TreeDirectory;
 import de.ralfebert.rcputils.tables.TableViewerBuilder;

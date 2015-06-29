@@ -5,10 +5,8 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.IExecutionListener;
 import org.eclipse.core.commands.NotHandledException;
 import org.eclipse.jface.viewers.TableViewer;
-
-import de.bht.fpa.mail.s797981.filter.AFilter;
-import de.bht.fpa.mail.s797981.filter.FactoryAdapterFilter;
-import de.bht.fpa.mail.s797981.filter.NullFilter;
+import de.bht.fpa.mail.s000000.common.filter.IFilter;
+import de.bht.fpa.mail.s000000.common.filter.NullFilter;
 
 public class ExecutionListener implements IExecutionListener {
 
@@ -30,7 +28,7 @@ public class ExecutionListener implements IExecutionListener {
 	@Override
 	public void postExecuteSuccess(String commandId, Object returnValue) {
 		
-		if (!(returnValue instanceof AFilter)) {
+		if (!(returnValue instanceof IFilter)) {
 			return;
 		}
 		
@@ -38,10 +36,10 @@ public class ExecutionListener implements IExecutionListener {
 			viewer.resetFilters();
 		}
 		
-		if (returnValue != null && returnValue instanceof AFilter) {
-			AFilter filter = (AFilter) returnValue;
+		if (returnValue != null && returnValue instanceof IFilter) {
+			IFilter filter = (IFilter) returnValue;
 			viewer.resetFilters();
-			viewer.addFilter(new FactoryAdapterFilter(filter));
+			viewer.addFilter(new AdapterFilter(filter));
 			viewer.refresh();
 		}
 	}

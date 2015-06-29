@@ -1,15 +1,16 @@
 package de.bht.fpa.mail.s797981.filter;
 
 import java.util.Arrays;
-
+import java.util.HashSet;
+import java.util.Set;
 import de.bht.fpa.mail.s000000.common.filter.IFilter;
 import de.bht.fpa.mail.s000000.common.mail.model.Message;
 
-public class UnionFilter extends AFilter{
+public class UnionFilter implements IFilter{
 
-	final private AFilter[] filters;
+	final private IFilter[] filters;
 
-	public UnionFilter(final AFilter... filters) {
+	public UnionFilter(final IFilter... filters) {
 		this.filters = filters;
 	}
 
@@ -18,18 +19,17 @@ public class UnionFilter extends AFilter{
 	 * 
 	 * @param Message to check
 	 */
-	boolean match(Message message) {
-		if (filters.length == 0) {
-		      return true;
-		    }
-		
-		for (AFilter filter : filters) {
-			if (filter.match(message)) {
-				return true;
-			}
-		}
-		return false;
-	}
+	  @Override
+	  public Set<Message> filter(Iterable<Message> messagesToFilter) {
+	    Set<Message> result = new HashSet<Message>();
+	    if (filters.length == 0) {
+	      result.addAll(new NullFilter().filter(messagesToFilter));
+	    }
+	    for (IFilter filter : filters) {
+	      result.addAll(filter.filter(messagesToFilter));
+	    }
+	    return result;
+	  }
 
 	@Override
 	public String toString() {

@@ -10,20 +10,21 @@
                label="Filter"
                mnemonic="M">
             <command
-                  commandId="de.bht.fpa.mail.s797981.filter.commands.sampleCommand"
-                  id="de.bht.fpa.mail.s797981.filter.menus.sampleCommand"
+                  commandId="de.bht.fpa.mail.s797981.filter.commands.setFilter"
+                  id="de.bht.fpa.mail.s797981.filter.menus.setFilter"
+                  label="Set filter"
                   mnemonic="R"
                   tooltip="Here you can set your filter">
             </command>
           <command
-                commandId="de.bht.fpa.mail.s797981.filter.commands.clear"
-                id="de.bht.fpa.mail.s797981.filter.menus.clear"
-                label="Clear"
-                mnemonic="C">
+                commandId="de.bht.fpa.mail.s797981.filter.commands.resetFilter"
+                id="de.bht.fpa.mail.s797981.filter.menus.resetFilter"
+                label="Reset filter"
+                mnemonic="C"
+                tooltip="Here you can reset your filter">
             </command>
          </menu>
       </menuContribution>
-     
    </extension>
    
     <extension
@@ -34,13 +35,13 @@
       </category>
       <command
             categoryId="de.bht.fpa.mail.s797981.filter.commands.category"
-            id="de.bht.fpa.mail.s797981.filter.commands.sampleCommand"
-            name="Configure">
+            id="de.bht.fpa.mail.s797981.filter.commands.setFilter"
+            name="Configure filter">
       </command>
       <command
             categoryId="de.bht.fpa.mail.s797981.filter.commands.category"
-            id="de.bht.fpa.mail.s797981.filter.commands.sampleCommand"
-            name="Clear">
+            id="de.bht.fpa.mail.s797981.filter.commands.resetFilter"
+            name="Clear filter">
       </command>
    </extension>
    
@@ -49,25 +50,28 @@
          point="org.eclipse.ui.handlers">
       <handler
             class="de.bht.fpa.mail.s797981.filter.handlers.SetFilterHandler"
-            commandId="de.bht.fpa.mail.s797981.filter.commands.sampleCommand">
+            commandId="de.bht.fpa.mail.s797981.filter.commands.setFilter">
       </handler>
       <handler
             class="de.bht.fpa.mail.s797981.filter.handlers.ResetFilterHandler"
-            commandId="de.bht.fpa.mail.s797981.filter.handlers.clear">
+            commandId="de.bht.fpa.mail.s797981.filter.commands.resetFilter">
       </handler>
    </extension>
    
    <extension
          point="org.eclipse.ui.bindings">
       <key
-            commandId="de.bht.fpa.mail.s797981.filter.commands.sampleCommand"
+            commandId="de.bht.fpa.mail.s797981.filter.commands.setFilter"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="M1+f">
       </key>
-      
-       
+      <key
+            commandId="de.bht.fpa.mail.s797981.filter.commands.resetFilter"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+d">
+      </key>
    </extension>
-      	  
 	
 </plugin>

@@ -10,7 +10,6 @@ package de.bht.fpa.mail.s000000.common.filter;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import de.bht.fpa.mail.s000000.common.mail.model.Message;
 
 /**

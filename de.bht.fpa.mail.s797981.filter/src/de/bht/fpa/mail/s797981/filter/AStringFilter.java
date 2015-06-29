@@ -10,7 +10,7 @@ import de.bht.fpa.mail.s000000.common.mail.model.Message;
  * @author Max
  *
  */
-public abstract class AStringFilter extends AFilter{
+public abstract class AStringFilter implements IFilter{
 	
 	final protected String searchedString;
 	final protected FilterOperator operator;
@@ -25,8 +25,4 @@ public abstract class AStringFilter extends AFilter{
 		this.searchedString = searchedString.toLowerCase();
 		this.operator = operator;
 	}
-
-	@Override
-	abstract boolean match(Message message);
-
 }

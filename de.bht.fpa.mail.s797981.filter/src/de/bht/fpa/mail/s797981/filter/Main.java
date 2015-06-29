@@ -10,7 +10,7 @@ import de.bht.fpa.mail.s000000.common.mail.testdata.RandomTestDataProvider;
 //import static org.junit.Assert.assertTrue;
 //import org.junit.Test;
 
-public class TestMain {
+public class Main {
 	final private static ReadFilter READ_FILTER = new ReadFilter(false);
 	final private static SenderFilter SENDER_FILTER = new SenderFilter("stulle_heidi@", FilterOperator.CONTAINS);
 	final private static RecipientsFilter RECIPIENT_FILTER = new RecipientsFilter("heidi stulle", FilterOperator.IS);
@@ -27,8 +27,8 @@ public class TestMain {
 //		readTest(messages);
 //		senderTest(messages);
 //		recipientTest(messages);
-//		unionTest(messages);
-		intersectionTest(messages);
+		unionTest(messages);
+//		intersectionTest(messages);
 
 
 		// assertTrue(messages.iterator().next().isRead(), false);
@@ -87,6 +87,10 @@ public class TestMain {
 
 	/**
 	 * Test case: Union("see configuration above in constants = separate filters").
+	 * Note, as this method use senderTest() and recipientTest() methods, number of messages founded in
+	 * this separate methods can be higher as number of messages founded in union test, because of some 
+	 * messages are equal (just compare sender ID) and as return value we have Set<Message>, so duplicate messages will 
+	 * be avoided.
 	 */
 	private static void unionTest(Collection<Message> messages) {
 		// first - filter messages with union filter
