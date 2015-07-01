@@ -78,9 +78,10 @@ public class MaillistViewPart extends ViewPart implements ISelectionListener {
 	};
 
 	/**
-	 * In this method be create new {@link MaillistTableViewerBuilder}, which represent a table with columns
+	 * In this method create new {@link MaillistTableViewerBuilder}, which represent a table with columns
 	 * for list of E-mails. As {@link MaillistTableViewerBuilder} is created it will be filled with list of {@link Message}.
-	 * On start list with E-mails is empty. Additionally will be provided quick search on E-mail in special search bar, that will be constructed here.  
+	 * On start list with E-mails is empty. Additionally will be provided quick search on E-mail in special search bar,
+	 * that will be constructed here.  
 	 */
 	public void createPartControl(Composite parent) {
 
