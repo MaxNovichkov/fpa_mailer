@@ -2,24 +2,28 @@ package de.bht.fpa.mail.s797981.filter;
 
 import de.bht.fpa.mail.s000000.common.filter.FilterOperator;
 import de.bht.fpa.mail.s000000.common.filter.IFilter;
-import de.bht.fpa.mail.s000000.common.mail.model.Message;
 
 /**
- * Abstract class for string based search.
+ * Abstract class for string based search, search with LowerCase, for case insensitive search.
  * 
- * @author Max
+ * @author Novichkov Maxm
  *
  */
 public abstract class AStringFilter implements IFilter{
-	
+	/**
+	 * Searched string
+	 */
 	final protected String searchedString;
+	/**
+	 * Searched filter operator
+	 */
 	final protected FilterOperator operator;
 
 	/**
-	 * Construct new AStringFilter -- search with LowerCase
+	 * Construct new AStringFilter, search with LowerCase, for case insensitive search.
 	 * 
-	 * @param searchedString
-	 * @param operator
+	 * @param searchedString String for search
+	 * @param operator Filter operator
 	 */
 	public AStringFilter(final String searchedString, final FilterOperator operator) {
 		this.searchedString = searchedString.toLowerCase();

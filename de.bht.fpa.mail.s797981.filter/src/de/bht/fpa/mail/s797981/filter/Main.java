@@ -2,42 +2,41 @@ package de.bht.fpa.mail.s797981.filter;
 
 import java.util.Collection;
 import java.util.Set;
+
 import de.bht.fpa.mail.s000000.common.filter.FilterOperator;
 import de.bht.fpa.mail.s000000.common.mail.model.Message;
 import de.bht.fpa.mail.s000000.common.mail.testdata.RandomTestDataProvider;
-//import org.eclipse.core.runtime.Assert;
-//import de.bht.fpa.mail.s000000.common.table.MessageValues;
-//import static org.junit.Assert.assertTrue;
-//import org.junit.Test;
 
+/**
+ * Simply test class for some filters. It is useful to start at the same time printAllMessages method and
+ * another one to control result. See more information in corresponding method.
+ * 
+ * @author Novichkov Maxim
+ *
+ */
 public class Main {
+	/**
+	 * Configurated filters
+	 */
 	final private static ReadFilter READ_FILTER = new ReadFilter(false);
 	final private static SenderFilter SENDER_FILTER = new SenderFilter("stulle_heidi@", FilterOperator.CONTAINS);
 	final private static RecipientsFilter RECIPIENT_FILTER = new RecipientsFilter("heidi stulle", FilterOperator.IS);
 	final private static UnionFilter UNION_FILTER = new UnionFilter(SENDER_FILTER, RECIPIENT_FILTER);
 	final private static IntersectionFilter INTERSECTION_FILTER = new IntersectionFilter(SENDER_FILTER, RECIPIENT_FILTER);
-	final static int number_of_mes = 30;
+	final private static int number_of_messages = 30;
 	
 	/** All filter configuration for tests should be changed in constants above. 
 	 *  This constants are used in all test methods.   
 	 */
 	public static void main(String[] args) {
-		Collection<Message> messages = new RandomTestDataProvider(number_of_mes).getMessages();
+		Collection<Message> messages = new RandomTestDataProvider(number_of_messages).getMessages();
+		
 		printAllMessages(messages);
 //		readTest(messages);
 //		senderTest(messages);
 //		recipientTest(messages);
 		unionTest(messages);
 //		intersectionTest(messages);
-
-
-		// assertTrue(messages.iterator().next().isRead(), false);
-		// for(Message mes : messages){
-		// assertTrue(mes.isRead(), false);
-		// System.out.println(mes.isRead());
-		//
-		// }
-
 	}
 
 	/**

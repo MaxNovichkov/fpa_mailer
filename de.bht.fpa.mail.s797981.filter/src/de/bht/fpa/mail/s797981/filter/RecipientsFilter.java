@@ -8,7 +8,11 @@ import de.bht.fpa.mail.s000000.common.filter.FilterOperator;
 import de.bht.fpa.mail.s000000.common.filter.StringCompareHelper;
 import de.bht.fpa.mail.s000000.common.mail.model.Message;
 import de.bht.fpa.mail.s000000.common.mail.model.Recipient;
-
+/**
+ * This class filter messages on provided {@link Recipient} and {@link FilterOperator} value. 
+ * 
+ * @author Novichkov Maxim
+ */
 public class RecipientsFilter extends AStringFilter {
 
 	/**

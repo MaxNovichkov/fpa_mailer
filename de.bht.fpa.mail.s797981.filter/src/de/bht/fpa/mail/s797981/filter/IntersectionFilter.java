@@ -6,29 +6,32 @@ import java.util.Set;
 
 import de.bht.fpa.mail.s000000.common.filter.IFilter;
 import de.bht.fpa.mail.s000000.common.mail.model.Message;
-
+/**
+ * This class act as container for different filters and provide ability to combine this filters
+ * and choose only that messages, that "exist" (left after filtering) in all filters.
+ *  
+ * @author Novichkov Maxim
+ */
 public class IntersectionFilter implements IFilter {
-
+	/**
+	 * Provided array with Filters
+	 */
 	final private IFilter[] filters;
-
+	/**
+	 * Construct new IntersectionFilter with provided Filters
+	 * 
+	 * @param filters Provided filters
+	 */
 	public IntersectionFilter(final IFilter... filters) {
 		this.filters = filters;
 	}
 
 	/**
-	 * Returns true only if message passed (contains in) trough all filters
+	 * Returns list of filtered messages passed (contains in) trough all filters.
 	 */
-//	boolean match(Message message) {
-//		boolean contain = true;
-//		for (AFilter filter : filters) {
-//			contain = contain && filter.match(message);
-//		}
-//		return contain;
-//	}
-	
 	 @Override
 	  public Set<Message> filter(Iterable<Message> messagesToFilter) {
-	    Set<Message> result = new HashSet<Message>();
+	    final Set<Message> result = new HashSet<Message>();
 	    for (Message message : messagesToFilter) {
 	      result.add(message);
 	    }

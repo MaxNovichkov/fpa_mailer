@@ -2,6 +2,7 @@ package de.bht.fpa.mail.s797981.maillist;
 
 import java.util.LinkedList;
 import java.util.List;
+
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TableViewer;
@@ -21,6 +22,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.commands.ICommandService;
 import org.eclipse.ui.part.ViewPart;
+
 import de.bht.fpa.mail.s000000.common.mail.model.Message;
 import de.bht.fpa.mail.s797981.fsnavigation.TreeDirectory;
 import de.ralfebert.rcputils.tables.TableViewerBuilder;
@@ -32,7 +34,9 @@ import de.ralfebert.rcputils.tables.TableViewerBuilder;
  *
  */
 public class MaillistViewPart extends ViewPart implements ISelectionListener {
-
+	/**
+	 * TableViewer
+	 */
 	private TableViewer tableViewer;
 	/**
 	 * List with messages
@@ -111,6 +115,8 @@ public class MaillistViewPart extends ViewPart implements ISelectionListener {
 			}
 
 		});
+		//add filter/start up
+		tableViewer.addFilter(new AdapterFilter());
 		
 		final IWorkbench workbench = PlatformUI.getWorkbench();
 	    ICommandService commandService = (ICommandService) workbench.getService(ICommandService.class);
@@ -120,5 +126,48 @@ public class MaillistViewPart extends ViewPart implements ISelectionListener {
 	public void dispose() {
 		getSite().getPage().removeSelectionListener(this);
 		super.dispose();
+	}
+	@Override
+	public String toString() {
+		return "MaillistViewPart [tableViewer=" + tableViewer + ", messages="
+				+ messages + ", searchText=" + searchText + "]";
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((messages == null) ? 0 : messages.hashCode());
+		result = prime * result
+				+ ((searchText == null) ? 0 : searchText.hashCode());
+		result = prime * result
+				+ ((tableViewer == null) ? 0 : tableViewer.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MaillistViewPart other = (MaillistViewPart) obj;
+		if (messages == null) {
+			if (other.messages != null)
+				return false;
+		} else if (!messages.equals(other.messages))
+			return false;
+		if (searchText == null) {
+			if (other.searchText != null)
+				return false;
+		} else if (!searchText.equals(other.searchText))
+			return false;
+		if (tableViewer == null) {
+			if (other.tableViewer != null)
+				return false;
+		} else if (!tableViewer.equals(other.tableViewer))
+			return false;
+		return true;
 	}
 }

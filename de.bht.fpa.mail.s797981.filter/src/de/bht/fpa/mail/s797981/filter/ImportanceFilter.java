@@ -7,17 +7,28 @@ import de.bht.fpa.mail.s000000.common.filter.IFilter;
 import de.bht.fpa.mail.s000000.common.mail.model.Importance;
 import de.bht.fpa.mail.s000000.common.mail.model.Message;
 
+/**
+ * This class filter messages on provided {@link Importance} value.
+ * 
+ * @author Novichkov Maxim
+ */
 public class ImportanceFilter implements IFilter{
-	
+	/**
+	 * Actual importance
+	 */
 	final private Importance importance;
-	
+	/**
+	 * Construct new ImportanceFilter
+	 * 
+	 * @param importance Provided importance
+	 */
 	public ImportanceFilter(final Importance importance){
 		this.importance = importance;
 	}
 	
 	@Override
-	  public Set<Message> filter(Iterable<Message> messagesToFilter) {
-	    Set<Message> result = new HashSet<Message>();
+	  public Set<Message> filter(final Iterable<Message> messagesToFilter) {
+	    final Set<Message> result = new HashSet<Message>();
 	    for (Message message : messagesToFilter) {
 	      if (message.getImportance().equals(importance)) {
 	        result.add(message);
@@ -25,4 +36,9 @@ public class ImportanceFilter implements IFilter{
 	    }
 	    return result;
 	  }
+
+	@Override
+	public String toString() {
+		return "ImportanceFilter [importance=" + importance + "]";
+	}
 }

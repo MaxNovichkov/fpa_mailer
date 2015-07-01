@@ -23,29 +23,34 @@ import de.bht.fpa.mail.s797981.filter.SubjectFilter;
 import de.bht.fpa.mail.s797981.filter.TextFilter;
 import de.bht.fpa.mail.s797981.filter.UnionFilter;
 
+/**
+ * This class create configured by user filter. 
+ * Created filter will be returned to Execution listener (Maillist plugin).
+ * 
+ * @author Novichkov Maxim
+ *
+ */
 public class SetFilterHandler extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
-		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
-		FilterDialog filterDialog = new FilterDialog(window.getShell());
+		final IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
+		final FilterDialog filterDialog = new FilterDialog(window.getShell());
 		filterDialog.open();
 
-		List<FilterCombination> filterCombinations = filterDialog.getFilterCombinations();
+		final List<FilterCombination> filterCombinations = filterDialog.getFilterCombinations();
 		if (filterCombinations == null) {
 			return null;
 		}
 		
-//		return FactoryAdapterFilter.createFilter(filterCombinations, filterDialog);
-		
-		List<IFilter> filters = new LinkedList<IFilter>();
+		final List<IFilter> filters = new LinkedList<IFilter>();
 		for (FilterCombination filterCombination : filterCombinations) {
 			final FilterType filterType = filterCombination.getFilterType();
 			final FilterOperator filterOperator = filterCombination.getFilterOperator();
 			final Object filterValue = filterCombination.getFilterValue();
 
-			System.out.println("Filter: type:" + filterType + " operator:" + filterOperator + " value:" + filterValue);
+//			System.out.println("Filter: type:" + filterType + " operator:" + filterOperator + " value:" + filterValue);
 
 			switch (filterType) {
 			case SENDER:
@@ -72,11 +77,11 @@ public class SetFilterHandler extends AbstractHandler {
 
 			switch (filterDialog.getFilterGroupType()) {
 			case INTERSECTION:
-				System.out.println("INTERSECTION");
+//				System.out.println("INTERSECTION");
 				return new IntersectionFilter(filters.toArray(new IFilter[filters.size()]));
 
 			case UNION:
-				System.out.println("UNION");
+//				System.out.println("UNION");
 				return new UnionFilter(filters.toArray(new IFilter[filters.size()]));
 			default:
 				return null;

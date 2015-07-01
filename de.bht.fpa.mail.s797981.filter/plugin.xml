@@ -19,7 +19,7 @@
           <command
                 commandId="de.bht.fpa.mail.s797981.filter.commands.resetFilter"
                 id="de.bht.fpa.mail.s797981.filter.menus.resetFilter"
-                label="Reset filter"
+                label="Clear filter"
                 mnemonic="C"
                 tooltip="Here you can reset your filter">
             </command>
@@ -64,13 +64,13 @@
             commandId="de.bht.fpa.mail.s797981.filter.commands.setFilter"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="M1+f">
+            sequence="M1+Q">
       </key>
       <key
             commandId="de.bht.fpa.mail.s797981.filter.commands.resetFilter"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="M1+d">
+            sequence="M1+A">
       </key>
    </extension>
 	
