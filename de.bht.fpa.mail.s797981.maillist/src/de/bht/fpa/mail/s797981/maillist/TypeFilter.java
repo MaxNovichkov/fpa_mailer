@@ -29,8 +29,7 @@ public class TypeFilter extends ViewerFilter {
 	/**
 	 * Construct new TypeFilter with searched text.
 	 * 
-	 * @param searchText
-	 *            Provided searched text
+	 * @param searchText Provided searched text
 	 */
 	public TypeFilter(final Text searchText) {
 		this.searchText = searchText;

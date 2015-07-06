@@ -23,8 +23,8 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.commands.ICommandService;
 import org.eclipse.ui.part.ViewPart;
 
+import de.bht.fpa.mail.s000000.common.mail.model.IMessageTreeItem;
 import de.bht.fpa.mail.s000000.common.mail.model.Message;
-import de.bht.fpa.mail.s797981.fsnavigation.TreeDirectory;
 import de.ralfebert.rcputils.tables.TableViewerBuilder;
 
 /**
@@ -60,11 +60,11 @@ public class MaillistViewPart extends ViewPart implements ISelectionListener {
 		if (!(sel instanceof IStructuredSelection)) {
 			return;
 		}
-		IStructuredSelection ss = (IStructuredSelection) sel;
-		Object o = ss.getFirstElement();
-		if (o instanceof TreeDirectory) {
-			TreeDirectory directory = (TreeDirectory) o;
-			messages = directory.getMessages();
+		final IStructuredSelection ss = (IStructuredSelection) sel;
+		final Object o = ss.getFirstElement();
+		if (o instanceof IMessageTreeItem) {
+			final IMessageTreeItem item = (IMessageTreeItem) o;
+			messages = item.getMessages();
 			tableViewer.setInput(messages);
 			final Table table = tableViewer.getTable();
 			for (TableColumn column : table.getColumns()) {
@@ -83,25 +83,25 @@ public class MaillistViewPart extends ViewPart implements ISelectionListener {
 	 * On start list with E-mails is empty. Additionally will be provided quick search on E-mail in special search bar,
 	 * that will be constructed here.  
 	 */
-	public void createPartControl(Composite parent) {
+	public void createPartControl(final Composite parent) {
 
 		parent.setLayout(new GridLayout(2, false));
 
-		Label searchLabel = new Label(parent, SWT.NONE);
+		final Label searchLabel = new Label(parent, SWT.NONE);
 		searchLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		searchLabel.setText("Search:");
 
 		searchText = new Text(parent, SWT.BORDER);
 		searchText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
-		Composite tableComposite = new Composite(parent, SWT.NONE);
-		GridData area = new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1);
+		final Composite tableComposite = new Composite(parent, SWT.NONE);
+		final GridData area = new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1);
 		tableComposite.setLayoutData(area);
 		
 		//test messages
 //		Collection<Message> messages = new RandomTestDataProvider(50).getMessages();
 		
-		TableViewerBuilder tvb = new MaillistTableViewerBuilder(tableComposite);
+		final TableViewerBuilder tvb = new MaillistTableViewerBuilder(tableComposite);
 		tableViewer = tvb.getTableViewer();
 		tvb.setInput(messages);
 
@@ -120,7 +120,7 @@ public class MaillistViewPart extends ViewPart implements ISelectionListener {
 		tableViewer.addFilter(new AdapterFilter());
 		
 		final IWorkbench workbench = PlatformUI.getWorkbench();
-	    ICommandService commandService = (ICommandService) workbench.getService(ICommandService.class);
+	    final ICommandService commandService = (ICommandService) workbench.getService(ICommandService.class);
 	    commandService.addExecutionListener(new ExecutionListener(tableViewer));
 	}
 	

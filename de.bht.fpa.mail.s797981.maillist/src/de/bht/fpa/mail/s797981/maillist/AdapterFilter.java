@@ -49,7 +49,7 @@ public class AdapterFilter extends ViewerFilter {
 	 */
 	@Override
 	public boolean select(Viewer viewer, Object parentElement, Object element) {
-		Set<Message> result = new HashSet<Message>();
+		final Set<Message> result = new HashSet<Message>();
 		result.add((Message) element);
 		return !filter.filter(result).isEmpty();
 	}

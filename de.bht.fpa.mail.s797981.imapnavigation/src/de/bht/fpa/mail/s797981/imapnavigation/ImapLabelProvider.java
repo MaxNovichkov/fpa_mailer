@@ -1,4 +1,4 @@
-package de.bht.fpa.mail.s797981.fsnavigation;
+package de.bht.fpa.mail.s797981.imapnavigation;
 
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
@@ -8,7 +8,7 @@ import org.eclipse.swt.graphics.Image;
  * provided element will be wrapped in ITreeElement.
  *
  */
-public class TreeLabelProvider extends LabelProvider {
+public class ImapLabelProvider extends LabelProvider {
 	/**
 	 * Return name of provided element.
 	 * 
@@ -17,8 +17,8 @@ public class TreeLabelProvider extends LabelProvider {
 	 */
 	@Override
 	public String getText(Object element) {
-		if (element instanceof ATreeItem) {
-			ATreeItem p = (ATreeItem) element;
+		if (element instanceof AImap) {
+			AImap p = (AImap) element;
 			return p.getName();
 		}
 		return super.getText(element);
@@ -32,8 +32,8 @@ public class TreeLabelProvider extends LabelProvider {
 	 */
 	@Override
 	public Image getImage(Object element) {
-		if (element instanceof ATreeItem) {
-			ATreeItem p = (ATreeItem) element;
+		if (element instanceof AImap) {
+			AImap p = (AImap) element;
 			return p.getImage();
 		}
 		return super.getImage(element);

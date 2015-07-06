@@ -12,14 +12,19 @@ import de.bht.fpa.mail.s000000.common.mail.model.Message;
  * @author Novichkov Maxim
  */
 public class TextFilter extends AStringFilter {
-
+	/**
+	 * Construct new TextFilter -- search with LowerCase
+	 * 
+	 * @param searchedString Provided value (as string)
+	 * @param operator Provided searched FilterOperator
+	 */
 	public TextFilter(String searchedString, FilterOperator operator) {
 		super(searchedString, operator);
 	}
 
 	@Override
 	public Set<Message> filter(Iterable<Message> messagesToFilter) {
-		Set<Message> result = new HashSet<Message>();
+		final Set<Message> result = new HashSet<Message>();
 		for (Message message : messagesToFilter) {
 			if (StringCompareHelper.matches(message.getText().toLowerCase(), searchedString, operator)) {
 				result.add(message);

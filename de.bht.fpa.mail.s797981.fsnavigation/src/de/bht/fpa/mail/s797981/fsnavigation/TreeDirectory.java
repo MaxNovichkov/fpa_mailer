@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.xml.bind.JAXB;
 
+import de.bht.fpa.mail.s000000.common.mail.model.IMessageTreeItem;
 import de.bht.fpa.mail.s000000.common.mail.model.Message;
 
 /**
@@ -15,7 +17,7 @@ import de.bht.fpa.mail.s000000.common.mail.model.Message;
  * 
  * @author Maxim Novichkov
  */
-public class TreeDirectory extends IAbstractTree {
+public class TreeDirectory extends ATreeItem {
 	/**
 	 * Path to the folder icon
 	 */
@@ -26,6 +28,7 @@ public class TreeDirectory extends IAbstractTree {
 	 * 
 	 * @param path The specified path
 	 */
+	
 	public TreeDirectory(final String path) {
 		super(path);
 		this.imagePath = FOLDER_PATH;
@@ -37,7 +40,7 @@ public class TreeDirectory extends IAbstractTree {
 	 * @return true if children exist
 	 */
 	public boolean hasChildren() {
-		return getChildren().length > 0;
+		return getChildren().size() > 0;
 	}
 
 	/**
@@ -45,21 +48,21 @@ public class TreeDirectory extends IAbstractTree {
 	 * 
 	 * @return Array with folders and files
 	 */
-	public Object[] getChildren() {
+	public List<IMessageTreeItem> getChildren() {
 		final File[] files = this.file.listFiles();
 		if (files == null) {
-			return new Object[0];
+			return super.list;
 		}
 
-		final ArrayList<TreeDirectory> directory = new ArrayList<TreeDirectory>();
+		final List<IMessageTreeItem> directory = new ArrayList<IMessageTreeItem>();
 		for (File item : files) {
 			if (item.isDirectory()) {
 				directory.add(new TreeDirectory(item.getPath()));
 			}
 		}
-		return directory.toArray();
+		return directory;
 	}
-
+	
 	/**
 	 * Check the directory if there some messages in specified xml format exist and return
 	 * list with this messages.
@@ -106,4 +109,6 @@ public class TreeDirectory extends IAbstractTree {
 		return "ITreeDirectory [imagePath=" + imagePath + ", path=" + path
 				+ ", file=" + file + "]";
 	}
+
+	
 }

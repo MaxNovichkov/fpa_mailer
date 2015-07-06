@@ -1,8 +1,12 @@
 package de.bht.fpa.mail.s797981.fsnavigation;
 
 import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.eclipse.swt.graphics.Image;
+
+import de.bht.fpa.mail.s000000.common.mail.model.IMessageTreeItem;
 
 /**
  * This abstract class represent a wrapper class for java.io.File and contains methods for working with 
@@ -10,7 +14,7 @@ import org.eclipse.swt.graphics.Image;
  * 
  * @author Maxim Novichkov
  */
-public abstract class IAbstractTree {
+public abstract class ATreeItem implements IMessageTreeItem{
 	
 	/**
 	 * Specified path for file or folder image icon
@@ -25,10 +29,13 @@ public abstract class IAbstractTree {
 	 */
 	protected final File file;
 	/**
-	 * Construct {@link IAbstractTree} 
+	 * Construct {@link ATreeItem} 
 	 * @param path The specified path
 	 */
-	public IAbstractTree(String path) {
+	
+	protected final List<IMessageTreeItem> list = new LinkedList<IMessageTreeItem>();
+	
+	public ATreeItem(String path) {
 		this.file = new File(path);
 		this.path = path;
 	}
@@ -37,8 +44,8 @@ public abstract class IAbstractTree {
 	 * Returns an empty array if it's instance of file 
 	 * @return An empty array
 	 */
-	public Object[] getChildren(){
-		return new Object[0];
+	public List<IMessageTreeItem> getChildren(){
+		return list;
 	};
 	
 	/**
@@ -55,6 +62,11 @@ public abstract class IAbstractTree {
 	
 	public Image getImage() {
 		return Activator.imageDescriptorFromPlugin(Activator.PLUGIN_ID,	imagePath).createImage();
+	}
+	
+	@Override
+	public String getText() {
+		return getName();
 	}
 	
 	@Override
@@ -76,7 +88,7 @@ public abstract class IAbstractTree {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		IAbstractTree other = (IAbstractTree) obj;
+		ATreeItem other = (ATreeItem) obj;
 		if (file == null) {
 			if (other.file != null)
 				return false;

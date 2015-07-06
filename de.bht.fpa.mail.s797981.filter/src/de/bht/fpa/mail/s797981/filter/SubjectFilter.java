@@ -15,8 +15,8 @@ public class SubjectFilter extends AStringFilter{
 	/**
 	 * Construct new SubjectFilter -- search with LowerCase
 	 * 
-	 * @param searchedString
-	 * @param operator
+	 * @param searchedString Provided value (as string)
+	 * @param operator Provided searched FilterOperator
 	 */
 	public SubjectFilter(final String searchedString, final FilterOperator operator) {
 		super(searchedString, operator);
@@ -24,7 +24,7 @@ public class SubjectFilter extends AStringFilter{
 	
 	@Override
 	  public Set<Message> filter(Iterable<Message> messagesToFilter) {
-	    Set<Message> result = new HashSet<Message>();
+	    final Set<Message> result = new HashSet<Message>();
 	    for (Message message : messagesToFilter) {
 	      if (StringCompareHelper.matches(message.getSubject().toLowerCase(), searchedString, operator)) {
 	        result.add(message);

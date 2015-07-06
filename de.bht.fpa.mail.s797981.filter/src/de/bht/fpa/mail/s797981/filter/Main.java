@@ -42,7 +42,7 @@ public class Main {
 	/**
 	 * Test case: Read("see final variable").
 	 */
-	private static void readTest(Collection<Message> messages) {
+	private static void readTest(final Collection<Message> messages) {
 		final Set<Message> read = READ_FILTER.filter(messages);
 		
 		System.out.println("Test. Configuration is: " + READ_FILTER.toString());
@@ -55,10 +55,10 @@ public class Main {
 	}
 
 	/**
-	 * Test case: Sender("see configuration in final variable SENDER_FILTER ")
+	 * Test case: Sender("see configuration in final variable SENDER_FILTER")
 	 */
-	private static void senderTest(Collection<Message> messages) {
-		Set<Message> senderMessages = SENDER_FILTER.filter(messages);
+	private static void senderTest(final Collection<Message> messages) {
+		final Set<Message> senderMessages = SENDER_FILTER.filter(messages);
 		
 		System.out.println("Test. Configuration is: " +  SENDER_FILTER.toString());
 		System.out.println("==================Founded messages with senderFilter: " + senderMessages.size() + " =====================");
@@ -72,8 +72,8 @@ public class Main {
 	/**
 	 * Test case: Recipient("see configuration in final variable RECIPIENT_FILTER"))
 	 */
-	private static void recipientTest(Collection<Message> messages) {
-		Set<Message> recipientMessages = RECIPIENT_FILTER.filter(messages);
+	private static void recipientTest(final Collection<Message> messages) {
+		final Set<Message> recipientMessages = RECIPIENT_FILTER.filter(messages);
 		
 		System.out.println("Test. Configuration is: " +  RECIPIENT_FILTER.toString());
 		System.out.println("==================Founded messages with recipientFilter: " + recipientMessages.size() + " =====================");
@@ -91,7 +91,7 @@ public class Main {
 	 * messages are equal (just compare sender ID) and as return value we have Set<Message>, so duplicate messages will 
 	 * be avoided.
 	 */
-	private static void unionTest(Collection<Message> messages) {
+	private static void unionTest(final Collection<Message> messages) {
 		// first - filter messages with union filter
 		final Set<Message> union = UNION_FILTER.filter(messages);
 		
@@ -112,7 +112,7 @@ public class Main {
 	 * messages are equal (just compare sender ID) and as return value we have Set<Message>, so duplicate messages will 
 	 * be avoided.
 	 */
-	private static void intersectionTest(Collection<Message> messages) {
+	private static void intersectionTest(final Collection<Message> messages) {
 		// first - filter messages with intersection filter
 		final Set<Message> intersection = INTERSECTION_FILTER.filter(messages);
 				
@@ -130,7 +130,7 @@ public class Main {
 	 * Print initially generated messages. It's very useful to use this method (don't comment it out) 
 	 * in combination with another tests. 
 	 */
-	private static void printAllMessages(Collection<Message> messages) {
+	private static void printAllMessages(final Collection<Message> messages) {
 		System.out.println("==================Generated messages: " + messages.size()	+ " =====================");
 		for(Message mes : messages){
 			System.out.println(mes.toShortString());

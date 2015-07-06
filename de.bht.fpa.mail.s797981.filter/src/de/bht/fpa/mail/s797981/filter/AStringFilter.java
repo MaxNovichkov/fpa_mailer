@@ -6,7 +6,7 @@ import de.bht.fpa.mail.s000000.common.filter.IFilter;
 /**
  * Abstract class for string based search, search with LowerCase, for case insensitive search.
  * 
- * @author Novichkov Maxm
+ * @author Novichkov Maxim
  *
  */
 public abstract class AStringFilter implements IFilter{

@@ -16,8 +16,8 @@ public class SenderFilter extends AStringFilter{
 
 	/**
 	 * Construct new SenderFilter -- search with LowerCase
-	 * @param searchedString
-	 * @param operator
+	 @param searchedString Provided value (as string)
+	 * @param operator Provided searched FilterOperator
 	 */
 	public SenderFilter(final String searchedString, final FilterOperator operator){
 		super(searchedString, operator);

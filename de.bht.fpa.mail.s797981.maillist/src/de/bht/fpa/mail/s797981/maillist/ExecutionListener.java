@@ -34,8 +34,7 @@ public class ExecutionListener implements IExecutionListener {
 	}
 
 	@Override
-	public void postExecuteFailure(String commandId,
-			ExecutionException exception) {
+	public void postExecuteFailure(String commandId, ExecutionException exception) {
 	}
 
 	/**

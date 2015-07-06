@@ -18,8 +18,8 @@ public class RecipientsFilter extends AStringFilter {
 	/**
 	 * Construct new RecipientsFilter -- search with LowerCase
 	 * 
-	 * @param searchedString
-	 * @param operator
+	 * @param searchedString Provided value (as string)
+	 * @param operator Provided searched FilterOperator
 	 */
 	public RecipientsFilter(final String searchedString, final FilterOperator operator) {
 		super(searchedString, operator);

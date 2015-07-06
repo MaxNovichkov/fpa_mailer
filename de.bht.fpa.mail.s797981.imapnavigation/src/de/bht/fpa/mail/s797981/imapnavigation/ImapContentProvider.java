@@ -1,4 +1,4 @@
-package de.bht.fpa.mail.s797981.fsnavigation;
+package de.bht.fpa.mail.s797981.imapnavigation;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -10,7 +10,7 @@ import de.bht.fpa.mail.s000000.common.mail.model.IMessageTreeItem;
  * This class provide content information for selected element.
  *
  */
-public class TreeContentProvider implements ITreeContentProvider {
+public class ImapContentProvider implements ITreeContentProvider {
 
 	/**
 	 * By clicking on the tree node (ITreeDirectory) item, this method return children of the
@@ -42,8 +42,8 @@ public class TreeContentProvider implements ITreeContentProvider {
 	 */
 	@Override
 	public boolean hasChildren(Object element) {
-		if (element instanceof ATreeItem) {
-			ATreeItem p = (ATreeItem) element;
+		if (element instanceof AImap) {
+			AImap p = (AImap) element;
 			return p.getChildren().size() > 0;
 		}
 		return false;
