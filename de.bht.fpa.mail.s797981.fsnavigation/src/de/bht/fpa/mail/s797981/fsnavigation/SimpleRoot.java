@@ -8,6 +8,8 @@ import java.io.PrintWriter;
 import java.util.Observable;
 import java.util.Scanner;
 
+import de.bht.fpa.mail.s797981.fsnavigation.items.TreeFolder;
+
 /**
  * This class provide ability to remember last used location chose by user or in
  * case of first start/file damage will be used default location (user.home).
@@ -22,8 +24,7 @@ public class SimpleRoot extends Observable {
 	/**
 	 * Default location
 	 */
-	private TreeDirectory directory = new TreeDirectory(
-			System.getProperty("user.home"));
+	private TreeFolder directory = new TreeFolder(System.getProperty("user.home"));
 	/**
 	 * File to save location
 	 */
@@ -48,7 +49,7 @@ public class SimpleRoot extends Observable {
 	 * 
 	 * @return ITreeDirectory root
 	 */
-	public TreeDirectory getRoot() {
+	public TreeFolder getRoot() {
 		return directory;
 	}
 
@@ -60,7 +61,7 @@ public class SimpleRoot extends Observable {
 	 */
 	public void setRoot(final String path) {
 		saveRoot(path);
-		directory = new TreeDirectory(path);
+		directory = new TreeFolder(path);
 		setChanged();
 		notifyObservers(directory);
 	}
@@ -92,13 +93,13 @@ public class SimpleRoot extends Observable {
 	 * 
 	 * @return Settled location
 	 */
-	private TreeDirectory readRoot() {
+	private TreeFolder readRoot() {
 		Scanner fin = null;
-		TreeDirectory result = null;
+		TreeFolder result = null;
 		try {
 			fin = new Scanner(history);
 			while (fin.hasNextLine()) {
-				result = new TreeDirectory(fin.nextLine().replace("\\", "/"));
+				result = new TreeFolder(fin.nextLine().replace("\\", "/"));
 				if (!result.exists()) {
 					return directory;
 				}

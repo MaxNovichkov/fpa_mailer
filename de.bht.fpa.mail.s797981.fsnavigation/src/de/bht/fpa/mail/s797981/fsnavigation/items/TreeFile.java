@@ -1,4 +1,4 @@
-package de.bht.fpa.mail.s797981.fsnavigation;
+package de.bht.fpa.mail.s797981.fsnavigation.items;
 
 import java.util.List;
 

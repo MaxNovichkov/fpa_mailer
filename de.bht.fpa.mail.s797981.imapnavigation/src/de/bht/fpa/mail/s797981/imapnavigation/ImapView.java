@@ -9,9 +9,12 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
 import org.eclipse.swt.SWT;
+
 import static de.bht.fpa.mail.s000000.common.mail.model.builder.Builders.*;
 import de.bht.fpa.mail.s000000.common.mail.model.Account;
 import de.bht.fpa.mail.s000000.common.mail.testdata.RandomTestDataProvider;
+import de.bht.fpa.mail.s797981.imapnavigation.items.AccountsList;
+import de.bht.fpa.mail.s797981.imapnavigation.items.DummyAccount;
 
 /**
  * 
@@ -19,10 +22,10 @@ import de.bht.fpa.mail.s000000.common.mail.testdata.RandomTestDataProvider;
  * Is a receiver in command pattern.
  *
  */
-public class ImapView extends ViewPart implements Observer{
+public class ImapView extends ViewPart{
 	public static final String ID = "de.bht.fpa.s797981.imapnavigation.NavigationView";
 	private static TreeViewer viewer;
-
+	private AccountsList accountsList;
 	/**
 	 * This is a callback that will allow us to create the viewer and initialize
 	 * it.
@@ -68,11 +71,12 @@ public class ImapView extends ViewPart implements Observer{
 	 * Set up a model to initialize tree hierarchy.
 	 */
 	private Object createModel() {
-		return new ImapAccount(DummyAccount.generateDummyAccount());
+		accountsList = new AccountsList();
+		accountsList.addAccount(AccountsList.generateDummyAccount());
+//		return new ImapAccount(DummyAccount.generateDummyAccount());
+		accountsList.writeImapAccount(accountsList);
+		return accountsList;
 	}
-	
-	
-	
 	
 	/**
 	 * Passing the focus request to the viewer's control.
@@ -81,12 +85,12 @@ public class ImapView extends ViewPart implements Observer{
 	public void setFocus() {
 		viewer.getControl().setFocus();
 	}
-	/**
-	 * We want update navigation view if path in SimpleRoot was changed by user. 
-	 * We use observer pattern for this.
-	 */
-	@Override
-	public void update(Observable o, Object directory) {
-		viewer.setInput(directory);
-	}
+//	/**
+//	 * We want update navigation view if path in SimpleRoot was changed by user. 
+//	 * We use observer pattern for this.
+//	 */
+//	@Override
+//	public void update(Observable o, Object directory) {
+//		viewer.setInput(directory);
+//	}
 }

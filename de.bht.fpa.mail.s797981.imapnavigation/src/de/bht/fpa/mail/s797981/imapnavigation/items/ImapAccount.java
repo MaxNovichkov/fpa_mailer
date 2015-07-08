@@ -1,4 +1,4 @@
-package de.bht.fpa.mail.s797981.imapnavigation;
+package de.bht.fpa.mail.s797981.imapnavigation.items;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -13,7 +13,7 @@ import de.bht.fpa.mail.s000000.common.mail.model.Folder;
 import de.bht.fpa.mail.s000000.common.mail.model.IMessageTreeItem;
 import de.bht.fpa.mail.s000000.common.mail.model.Message;
 
-public class ImapAccount extends AImap{
+public class ImapAccount extends AImapItem{
 
 	/**
 	 * Path to the folder icon
@@ -30,16 +30,9 @@ public class ImapAccount extends AImap{
 	}
 	
 	public List<IMessageTreeItem> getChildren() {
-		final List<Folder> folder = this.account.getFolders();
-		if (folder == null) {
-			return super.list;
-		}
-
 		final List<IMessageTreeItem> children = new ArrayList<IMessageTreeItem>();
-		for (Folder item : folder) {
-			if (item instanceof Folder) {
+		for (Folder item : account.getFolders()) {
 				children.add(new ImapFolder(item));
-			}
 		}
 		return children;
 	}

@@ -1,7 +1,7 @@
 package de.bht.fpa.mail.s797981.fsnavigation.handlers;
 
-import de.bht.fpa.mail.s797981.fsnavigation.TreeDirectory;
 import de.bht.fpa.mail.s797981.fsnavigation.SimpleRoot;
+import de.bht.fpa.mail.s797981.fsnavigation.items.TreeFolder;
 
 /**
  * This class implement concrete command and set selected by user path 
@@ -24,7 +24,7 @@ public class SetDirectoryCommand implements ICommand{
 		root = path;
 	}
 	/**
-	 * This method will set wrapped in {@link TreeDirectory} path in navigation view.
+	 * This method will set wrapped in {@link TreeFolder} path in navigation view.
 	 */
 	public void execute() {
 		SimpleRoot.getInstance().setRoot(root);

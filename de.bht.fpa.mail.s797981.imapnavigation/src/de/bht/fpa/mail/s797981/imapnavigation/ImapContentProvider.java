@@ -2,9 +2,12 @@ package de.bht.fpa.mail.s797981.imapnavigation;
 
 import java.util.LinkedList;
 import java.util.List;
+
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
+
 import de.bht.fpa.mail.s000000.common.mail.model.IMessageTreeItem;
+import de.bht.fpa.mail.s797981.imapnavigation.items.AImapItem;
 
 /**
  * This class provide content information for selected element.
@@ -42,8 +45,8 @@ public class ImapContentProvider implements ITreeContentProvider {
 	 */
 	@Override
 	public boolean hasChildren(Object element) {
-		if (element instanceof AImap) {
-			AImap p = (AImap) element;
+		if (element instanceof AImapItem) {
+			AImapItem p = (AImapItem) element;
 			return p.getChildren().size() > 0;
 		}
 		return false;

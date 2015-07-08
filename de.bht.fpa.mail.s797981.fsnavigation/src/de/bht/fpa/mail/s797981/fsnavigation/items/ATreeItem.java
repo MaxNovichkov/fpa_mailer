@@ -1,4 +1,4 @@
-package de.bht.fpa.mail.s797981.fsnavigation;
+package de.bht.fpa.mail.s797981.fsnavigation.items;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -7,6 +7,7 @@ import java.util.List;
 import org.eclipse.swt.graphics.Image;
 
 import de.bht.fpa.mail.s000000.common.mail.model.IMessageTreeItem;
+import de.bht.fpa.mail.s797981.fsnavigation.Activator;
 
 /**
  * This abstract class represent a wrapper class for java.io.File and contains methods for working with 

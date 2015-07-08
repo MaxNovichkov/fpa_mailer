@@ -1,4 +1,4 @@
-package de.bht.fpa.mail.s797981.fsnavigation;
+package de.bht.fpa.mail.s797981.fsnavigation.items;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -17,7 +17,7 @@ import de.bht.fpa.mail.s000000.common.mail.model.Message;
  * 
  * @author Maxim Novichkov
  */
-public class TreeDirectory extends ATreeItem {
+public class TreeFolder extends ATreeItem {
 	/**
 	 * Path to the folder icon
 	 */
@@ -29,7 +29,7 @@ public class TreeDirectory extends ATreeItem {
 	 * @param path The specified path
 	 */
 	
-	public TreeDirectory(final String path) {
+	public TreeFolder(final String path) {
 		super(path);
 		this.imagePath = FOLDER_PATH;
 	}
@@ -57,7 +57,7 @@ public class TreeDirectory extends ATreeItem {
 		final List<IMessageTreeItem> directory = new ArrayList<IMessageTreeItem>();
 		for (File item : files) {
 			if (item.isDirectory()) {
-				directory.add(new TreeDirectory(item.getPath()));
+				directory.add(new TreeFolder(item.getPath()));
 			}
 		}
 		return directory;
@@ -97,7 +97,7 @@ public class TreeDirectory extends ATreeItem {
 		return messages;
 	}
 	/**
-	 * Check if this {@link TreeDirectory} exist
+	 * Check if this {@link TreeFolder} exist
 	 * @return True if exist
 	 */
 	public boolean exists(){

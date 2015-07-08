@@ -2,9 +2,12 @@ package de.bht.fpa.mail.s797981.fsnavigation;
 
 import java.util.LinkedList;
 import java.util.List;
+
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
+
 import de.bht.fpa.mail.s000000.common.mail.model.IMessageTreeItem;
+import de.bht.fpa.mail.s797981.fsnavigation.items.ATreeItem;
 
 /**
  * This class provide content information for selected element.

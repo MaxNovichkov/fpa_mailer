@@ -3,6 +3,8 @@ package de.bht.fpa.mail.s797981.fsnavigation;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
 
+import de.bht.fpa.mail.s797981.fsnavigation.items.ATreeItem;
+
 /**
  * This class provide name and image of selected tree item (ITreeDIrectory) element. In this case
  * provided element will be wrapped in ITreeElement.
