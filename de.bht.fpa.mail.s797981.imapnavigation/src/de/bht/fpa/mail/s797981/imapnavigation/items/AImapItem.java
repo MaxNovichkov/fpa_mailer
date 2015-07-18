@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+
 import org.eclipse.swt.graphics.Image;
 
 import de.bht.fpa.mail.s000000.common.mail.model.Account;
@@ -14,6 +16,7 @@ import de.bht.fpa.mail.s797981.imapnavigation.Activator;
 
 public abstract class AImapItem implements IMessageTreeItem {
 	
+	@XmlElement
 	protected Account account;
 	
 	/**

@@ -1,13 +1,7 @@
 package de.bht.fpa.mail.s797981.imapnavigation.items;
 
-import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-
-import javax.xml.bind.JAXB;
-
 import de.bht.fpa.mail.s000000.common.mail.model.Account;
 import de.bht.fpa.mail.s000000.common.mail.model.Folder;
 import de.bht.fpa.mail.s000000.common.mail.model.IMessageTreeItem;
@@ -19,6 +13,10 @@ public class ImapAccount extends AImapItem{
 	 * Path to the folder icon
 	 */
 	private static final String FOLDER_PATH = "icons/file_s.png";
+	
+	public ImapAccount() {
+		super();
+	}
 	
 	public ImapAccount(final Account account) {
 		super(account);

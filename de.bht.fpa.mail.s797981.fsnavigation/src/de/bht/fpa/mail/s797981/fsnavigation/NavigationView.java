@@ -2,10 +2,11 @@ package de.bht.fpa.mail.s797981.fsnavigation;
 
 import java.util.Observable;
 import java.util.Observer;
+
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
-import org.eclipse.swt.SWT;
 
 /**
  * 
@@ -62,7 +63,7 @@ public class NavigationView extends ViewPart implements Observer{
 	 * Set up a model to initialize tree hierarchy.
 	 */
 	private Object createModel() {
-		return new SimpleRoot().getRoot();
+		return SimpleRoot.getInstance().getRoot();
 	}
 
 	/**

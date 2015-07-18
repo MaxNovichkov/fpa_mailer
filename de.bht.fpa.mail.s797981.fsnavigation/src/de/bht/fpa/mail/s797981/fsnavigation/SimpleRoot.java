@@ -32,13 +32,13 @@ public class SimpleRoot extends Observable {
 	/**
 	 * Instance of this class
 	 */
-	final private static SimpleRoot root = new SimpleRoot();
+	final private static SimpleRoot INSTANCE_SIMPLE_ROOT = new SimpleRoot();
 
 	/**
 	 * Construct new SimpleRoot, if history file exist and valid, in this case will be
 	 * used saved path.
 	 */
-	public SimpleRoot() {
+	private SimpleRoot() {
 		if (history.exists()) {
 			directory = readRoot();
 		}
@@ -118,7 +118,7 @@ public class SimpleRoot extends Observable {
 	 * @return Instance of SimpleRoot
 	 */
 	public static SimpleRoot getInstance() {
-		return root;
+		return INSTANCE_SIMPLE_ROOT;
 	}
 
 	@Override

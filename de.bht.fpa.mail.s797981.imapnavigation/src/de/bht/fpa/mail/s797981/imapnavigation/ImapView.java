@@ -1,20 +1,23 @@
 package de.bht.fpa.mail.s797981.imapnavigation;
 
-import java.util.Observable;
-
-
-import java.util.Observer;
-
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
-import org.eclipse.swt.SWT;
 
-import static de.bht.fpa.mail.s000000.common.mail.model.builder.Builders.*;
+import de.bht.fpa.mail.s000000.common.mail.imapsync.ImapHelper;
+import de.bht.fpa.mail.s000000.common.mail.imapsync.SynchronizationException;
 import de.bht.fpa.mail.s000000.common.mail.model.Account;
-import de.bht.fpa.mail.s000000.common.mail.testdata.RandomTestDataProvider;
+import de.bht.fpa.mail.s000000.common.mail.model.Folder;
+import de.bht.fpa.mail.s000000.common.mail.model.Message;
+import de.bht.fpa.mail.s797981.imapnavigation.items.AccountListLoader;
 import de.bht.fpa.mail.s797981.imapnavigation.items.AccountsList;
-import de.bht.fpa.mail.s797981.imapnavigation.items.DummyAccount;
 
 /**
  * 
@@ -59,11 +62,7 @@ public class ImapView extends ViewPart{
 		 * data when the user expands tree items.
 		 */
 		viewer.setInput(createModel());
-		/**
-		 * Register observer to observe changes on SimpleRoot.
-		 */
-//		SimpleRoot.getInstance().addObserver(this);
-		
+
 		getSite().setSelectionProvider(viewer);
 	}
 
@@ -72,9 +71,46 @@ public class ImapView extends ViewPart{
 	 */
 	private Object createModel() {
 		accountsList = new AccountsList();
+		
+		
+		Job job = new Job("My Job") {
+			  @Override
+			  protected IStatus run(IProgressMonitor monitor) {
+			    // do something long running
+				  Account toSync = ImapHelper.getAccount("FPA-Gmail");
+				  try {
+					toSync = AccountsList.getBeuthGmailAccount(); 
+					ImapHelper.syncAllFoldersToAccount(toSync , monitor);
+					if (monitor.isCanceled()) return Status.CANCEL_STATUS;
+				} catch (SynchronizationException e) {
+					// TODO Auto-generated catch block
+//					e.printStackTrace();
+				}
+//				  ImapHelper.saveAccount(toSync);
+				  accountsList.addAccount(toSync);
+					  
+			    // If you want to update the UI
+			    return Status.OK_STATUS;
+			  }
+			};
+			
+			job.addJobChangeListener(new JobChangeAdapter() {
+		        public void done(IJobChangeEvent event) {
+		        if (event.getResult().isOK())
+		           System.out.println("Job completed successfully");
+		           else
+		              System.out.println("Job did not complete successfully");
+		        }
+		     });
+		  job.setSystem(true);
+
+			// Start the Job
+			job.schedule(); 
+		
 		accountsList.addAccount(AccountsList.generateDummyAccount());
+//		accountsList = AccountListLoader.readImapAccount();
 //		return new ImapAccount(DummyAccount.generateDummyAccount());
-		accountsList.writeImapAccount(accountsList);
+//		accountsList.writeImapAccount(accountsList);
 		return accountsList;
 	}
 	

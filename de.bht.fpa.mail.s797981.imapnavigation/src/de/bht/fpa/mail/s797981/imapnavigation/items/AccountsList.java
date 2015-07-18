@@ -9,67 +9,61 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.xml.bind.DataBindingException;
+import javax.xml.bind.JAXB;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.eclipse.swt.graphics.Image;
+
 import de.bht.fpa.mail.s000000.common.mail.model.Account;
 import de.bht.fpa.mail.s000000.common.mail.model.IMessageTreeItem;
 import de.bht.fpa.mail.s000000.common.mail.model.Message;
 import de.bht.fpa.mail.s000000.common.mail.testdata.RandomTestDataProvider;
+import de.bht.fpa.mail.s797981.imapnavigation.Activator;
 
 @XmlRootElement
 public class AccountsList extends AImapItem{
 	
-	File file = new File(System.getProperty("user.home") + "/accountsList.xml");
+	@Override
+	public Image getImage() {
+		return Activator.imageDescriptorFromPlugin(Activator.PLUGIN_ID,	imagePath).createImage();
+	}
+	
+	@XmlElement(name = "AccountList")
+	final private List<ImapAccount> toRead;
 	
 	
-	final private Collection<ImapAccount> toWrite;
-	
-	@XmlElement(name = "Account")
-	final private List<IMessageTreeItem> item;
+//	final private List<IMessageTreeItem> item;
 	
 	public AccountsList() {
-		item = new LinkedList<IMessageTreeItem>();
-		toWrite = new ArrayList<ImapAccount>();
+//		item = new ArrayList<IMessageTreeItem>();
+		toRead = new LinkedList<ImapAccount>();
 	}
 	
-	public ImapAccount readImapAccount(){
-		
-		
-		return null;
-	}
 	
-	public void writeImapAccount(final AccountsList list){
-		
-		 try {
-		 JAXBContext jaxbContext = JAXBContext.newInstance(AccountsList.class);
-		 Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-		 jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		jaxbMarshaller.marshal(list, file);
-		} catch (JAXBException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
 	
 	@Override
 	public boolean hasChildren() {
-		return item.size() > 0;
+		return toRead.size() > 0;
 	}
 	
-	public List<IMessageTreeItem> addAccount(Account account) {
+	public List<ImapAccount> addAccount(Account account) {
 //		this.account = account;
-		toWrite.add(new ImapAccount(account));
-		item.add(new ImapAccount(account));
-		return item;
+		toRead.add(new ImapAccount(account));
+//		item.add(new ImapAccount(account));
+		return toRead;
 	}
 	
 	public List<IMessageTreeItem> getChildren() {
-		return item;
+		List<IMessageTreeItem> list = new ArrayList<IMessageTreeItem>();
+		for(ImapAccount account : toRead){
+			list.add(account);
+		}
+		return list;
 	}
 
 	@Override
@@ -87,8 +81,16 @@ public class AccountsList extends AImapItem{
 		return account.getName();
 	}
 	
+	public static Account getBeuthGmailAccount(){
+		
+		return newAccountBuilder()
+			      .name("FPA-Gmail")
+			      .host("imap.gmail.com")
+			      .username("fpabht")
+			      .password("FPAG-mail").build();
+	}
+	
 	public static Account generateDummyAccount() {
-
 		  return newAccountBuilder()
 			      .name("Test")
 			      .host("imap.beuth-hochschule.de")
