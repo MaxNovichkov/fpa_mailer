@@ -6,8 +6,8 @@ import org.eclipse.swt.graphics.Image;
 import de.bht.fpa.mail.s797981.imapnavigation.items.AImapItem;
 
 /**
- * This class provide name and image of selected tree item (ITreeDIrectory) element. In this case
- * provided element will be wrapped in ITreeElement.
+ * This class provide name and image of selected imap item element. In this case
+ * provided element will be wrapped in AImapItem.
  *
  */
 public class ImapLabelProvider extends LabelProvider {

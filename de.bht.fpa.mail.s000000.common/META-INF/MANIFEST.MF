@@ -11,6 +11,7 @@ Bundle-ClassPath: .,
  libs/eclipselink.jar
 Bundle-Activator: de.bht.fpa.mail.s000000.common.internal.Activator
 Export-Package: 
+ com.sun.mail.smtp,
  de.bht.fpa.mail.s000000.common.filter,
  de.bht.fpa.mail.s000000.common.mail.imapsync,
  de.bht.fpa.mail.s000000.common.mail.messagedetails,
@@ -23,7 +24,8 @@ Export-Package:
  javax.persistence;version="2.0.3.fpa",
  javax.persistence.criteria;version="2.0.3.fpa",
  javax.persistence.metamodel;version="2.0.3.fpa",
- javax.persistence.spi;version="2.0.3.fpa"
+ javax.persistence.spi;version="2.0.3.fpa",
+ org.eclipse.persistence.sessions
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ui,
  de.ralfebert.rcputils;bundle-version="1.0.0"

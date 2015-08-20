@@ -9,10 +9,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
 
 /**
- * 
  * This class represent navigation view. 
- * Is a receiver in command pattern.
- *
  */
 public class NavigationView extends ViewPart implements Observer{
 	public static final String ID = "de.bht.fpa.s797981.fsnavigation.NavigationView";

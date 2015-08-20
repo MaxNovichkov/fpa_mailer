@@ -2,22 +2,29 @@ package de.bht.fpa.mail.s797981.imapnavigation.items;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import de.bht.fpa.mail.s000000.common.mail.model.Account;
 import de.bht.fpa.mail.s000000.common.mail.model.Folder;
 import de.bht.fpa.mail.s000000.common.mail.model.IMessageTreeItem;
 import de.bht.fpa.mail.s000000.common.mail.model.Message;
-
-public class ImapFolder extends AImapItem{
-	
-	private Folder folder;
+/**
+ * This class represents a wrapped {@link Folder} with corresponding icon.
+ * 
+ * @author Novichkov Maxim
+ */
+public class ImapFolder extends AImapItem {
+	/**
+	 * Folder field
+	 */
+	private final Folder folder;
 	
 	/**
 	 * Path to the folder icon
 	 */
 	private static final String FOLDER_PATH = "icons/folder_s.png";
-	
-	public ImapFolder(Folder folder) {
+	/**
+	 * Construct new {@link ImapFolder} with corresponding icon.
+	 * @param folder Provided {@link Folder}
+	 */
+	public ImapFolder(final Folder folder) {
 		this.folder = folder;
 		this.imagePath = FOLDER_PATH;
 	}
@@ -31,7 +38,9 @@ public class ImapFolder extends AImapItem{
 	public List<Message> getMessages() {
 		return folder.getMessages();
 	}
-	
+	/**
+	 * Returns list with {@link ImapFolder}s
+	 */
 	public List<IMessageTreeItem> getChildren() {
 		final List<IMessageTreeItem> children = new ArrayList<IMessageTreeItem>();
 		for (Folder item : folder.getFolders()) {

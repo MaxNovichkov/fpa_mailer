@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<accountsList>
+    <AccountList>
+        <account>
+		 <host>imap.beuth-hochschule.de</host>
+            <name>LoadedFromFile</name>
+            <password>test</password>
+            <username>max</username>
+        </account>
+	</AccountList>
+	<AccountList>	
+  		<account>
+		 <host>imap.beuth-hochschule.de</host>
+            <name>LoadedFromFile1</name>
+            <password>test</password>
+            <username>max</username>
+        </account>
+    </AccountList>
+</accountsList>

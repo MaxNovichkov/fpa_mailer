@@ -1,31 +1,34 @@
 package de.bht.fpa.mail.s797981.imapnavigation.items;
 
 import java.io.File;
-
 import javax.xml.bind.DataBindingException;
 import javax.xml.bind.JAXB;
-
-
+/**
+ * Provide ability to load imap accounts from xml file.
+ * 
+ * @author Novichkov Maxim
+ */
 public class AccountListLoader {
 	
-	private final static File file = new File(System.getProperty("user.home") + "/accountsList.xml");
+	// Test xml file placed in project folder files ("de.bht.fpa.mail.s797981.imapnavigation/files/accountsList.xml"),
+	// please, just copy it to user.home location
+	/**
+	 * File with saved imap accounts.
+	 */
+	private final static File file = new File(System.getProperty("user.home") +  "/accountsList.xml");
 	
-	public static AccountsList readImapAccount(){
-		AccountsList list = new AccountsList();
-		try {
-			list = JAXB.unmarshal(file, AccountsList.class);
-		    } catch (DataBindingException e) {
-		      System.err.println("File not found");
-		    }
-		    return list;
-		
-	}
-	
-	public void writeImapAccount(AccountsList accounts) {
+	/**
+	 * Load accounts from xml file, if file not exist, 
+	 * test xml file placed in project folder files ("de.bht.fpa.mail.s797981.imapnavigation/files/accountsList.xml"), 
+	 * please, just copy it to your user.home location.
+	 */
+	public static void loadFromFileImapAccounts(){
 	    try {
-	      JAXB.marshal(accounts, file);
+	      for(ImapAccount account : JAXB.unmarshal(file, AccountsList.class).getListImapAccounts()){
+	    	  AccountsList.getInstance().addAccount(account.getAccount());
+	      }
 	    } catch (DataBindingException e) {
-	      System.err.println("Failed to write");
+	      System.err.println("File " + file.getName() + " not found");
 	    }
-	  }
+	}
 }

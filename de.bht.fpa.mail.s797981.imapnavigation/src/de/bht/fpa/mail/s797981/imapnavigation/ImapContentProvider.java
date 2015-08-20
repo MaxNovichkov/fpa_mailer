@@ -16,7 +16,7 @@ import de.bht.fpa.mail.s797981.imapnavigation.items.AImapItem;
 public class ImapContentProvider implements ITreeContentProvider {
 
 	/**
-	 * By clicking on the tree node (ITreeDirectory) item, this method return children of the
+	 * By clicking on the imap item, this method return children of the
 	 * selected element.
 	 * 
 	 * @param Selected element

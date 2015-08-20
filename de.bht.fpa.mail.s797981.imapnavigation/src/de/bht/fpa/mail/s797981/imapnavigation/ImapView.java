@@ -9,26 +9,23 @@ import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.part.ViewPart;
 
 import de.bht.fpa.mail.s000000.common.mail.imapsync.ImapHelper;
-import de.bht.fpa.mail.s000000.common.mail.imapsync.SynchronizationException;
 import de.bht.fpa.mail.s000000.common.mail.model.Account;
-import de.bht.fpa.mail.s000000.common.mail.model.Folder;
-import de.bht.fpa.mail.s000000.common.mail.model.Message;
 import de.bht.fpa.mail.s797981.imapnavigation.items.AccountListLoader;
 import de.bht.fpa.mail.s797981.imapnavigation.items.AccountsList;
 
 /**
  * 
- * This class represent navigation view. 
- * Is a receiver in command pattern.
+ * This class represent imap navigation view.
  *
  */
-public class ImapView extends ViewPart{
+public class ImapView extends ViewPart {
 	public static final String ID = "de.bht.fpa.s797981.imapnavigation.NavigationView";
 	private static TreeViewer viewer;
-	private AccountsList accountsList;
+
 	/**
 	 * This is a callback that will allow us to create the viewer and initialize
 	 * it.
@@ -64,56 +61,80 @@ public class ImapView extends ViewPart{
 		viewer.setInput(createModel());
 
 		getSite().setSelectionProvider(viewer);
+		/**
+		 * Here we update ImapView in dependence on running job by setting 
+		 * AccountsList with corresponding updated list of imap accounts.
+		 */
+		Job.getJobManager().addJobChangeListener(new JobChangeAdapter() {
+			@Override
+			public void done(IJobChangeEvent event) {
+				String jobName = event.getJob().getName();
+				switch (jobName) {
+				case "IMAP Loading":
+					System.out.println("IMAP Loading =====================");
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							viewer.setInput(AccountsList.getInstance());
+						}
+					});
+					break;
+				case "IMAP Synchronising":
+					System.out.println("IMAP Synchronising =====================");
+					Display.getDefault().asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							viewer.setInput(AccountsList.getInstance());
+						}
+					});
+					break;
+				default:
+					break;
+				}
+			}
+		});
 	}
 
 	/**
 	 * Set up a model to initialize tree hierarchy.
 	 */
 	private Object createModel() {
-		accountsList = new AccountsList();
-		
-		
-		Job job = new Job("My Job") {
-			  @Override
-			  protected IStatus run(IProgressMonitor monitor) {
-			    // do something long running
-				  Account toSync = ImapHelper.getAccount("FPA-Gmail");
-				  try {
-					toSync = AccountsList.getBeuthGmailAccount(); 
-					ImapHelper.syncAllFoldersToAccount(toSync , monitor);
-					if (monitor.isCanceled()) return Status.CANCEL_STATUS;
-				} catch (SynchronizationException e) {
-					// TODO Auto-generated catch block
-//					e.printStackTrace();
+		/**
+		 * Load imap dummy account.
+		 */
+		AccountsList.getInstance().addAccount(AccountsList.generateDummyAccount());
+		/**
+		 * Load accounts from xml file, if file not exist, 
+		 * test xml file placed in project folder files ("de.bht.fpa.mail.s797981.imapnavigation/files/accountsList.xml"), 
+		 * please, just copy it to your user.home location
+		 */
+		AccountListLoader.loadFromFileImapAccounts();
+		/**
+		 * New job for loading existed imap account from db or if no imap account exist, 
+		 * new one will be created. Loaded imap account will be settled to AccountsList.
+		 */
+		Job job = new Job("IMAP Loading") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				Account loaded = ImapHelper.getAccount("FPA-Gmail");
+				if (loaded == null) {
+					loaded = AccountsList.getBeuthGmailAccount();
+					ImapHelper.saveAccount(loaded);
 				}
-//				  ImapHelper.saveAccount(toSync);
-				  accountsList.addAccount(toSync);
-					  
-			    // If you want to update the UI
-			    return Status.OK_STATUS;
-			  }
-			};
-			
-			job.addJobChangeListener(new JobChangeAdapter() {
-		        public void done(IJobChangeEvent event) {
-		        if (event.getResult().isOK())
-		           System.out.println("Job completed successfully");
-		           else
-		              System.out.println("Job did not complete successfully");
-		        }
-		     });
-		  job.setSystem(true);
+				if (monitor.isCanceled()) {
+					return Status.CANCEL_STATUS;
+				}
+				
+				AccountsList.getInstance().addAccount(loaded);
 
-			// Start the Job
-			job.schedule(); 
-		
-		accountsList.addAccount(AccountsList.generateDummyAccount());
-//		accountsList = AccountListLoader.readImapAccount();
-//		return new ImapAccount(DummyAccount.generateDummyAccount());
-//		accountsList.writeImapAccount(accountsList);
-		return accountsList;
+				return Status.OK_STATUS;
+			}
+		};
+		job.schedule();
+
+		return AccountsList.getInstance();
 	}
-	
+
 	/**
 	 * Passing the focus request to the viewer's control.
 	 */
@@ -121,12 +142,4 @@ public class ImapView extends ViewPart{
 	public void setFocus() {
 		viewer.getControl().setFocus();
 	}
-//	/**
-//	 * We want update navigation view if path in SimpleRoot was changed by user. 
-//	 * We use observer pattern for this.
-//	 */
-//	@Override
-//	public void update(Observable o, Object directory) {
-//		viewer.setInput(directory);
-//	}
 }

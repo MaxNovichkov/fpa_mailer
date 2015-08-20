@@ -11,5 +11,8 @@ Bundle-ActivationPolicy: lazy
 Import-Package: de.bht.fpa.mail.s000000.common.mail.imapsync,
  de.bht.fpa.mail.s000000.common.mail.model,
  de.bht.fpa.mail.s000000.common.mail.model.builder,
- de.bht.fpa.mail.s000000.common.mail.testdata
-Export-Package: de.bht.fpa.mail.s797981.imapnavigation.items
+ de.bht.fpa.mail.s000000.common.mail.testdata,
+ javax.mail
+Export-Package: javax.mail.internet
+Bundle-ClassPath: src/,
+ lib/mail.jar

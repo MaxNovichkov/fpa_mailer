@@ -6,41 +6,55 @@ import de.bht.fpa.mail.s000000.common.mail.model.Account;
 import de.bht.fpa.mail.s000000.common.mail.model.Folder;
 import de.bht.fpa.mail.s000000.common.mail.model.IMessageTreeItem;
 import de.bht.fpa.mail.s000000.common.mail.model.Message;
-
-public class ImapAccount extends AImapItem{
+/**
+ * This class represents a wrapped {@link Account} with corresponding icon.
+ * 
+ * @author Novichkov Maxim
+ */
+public class ImapAccount extends AImapItem {
 
 	/**
 	 * Path to the folder icon
 	 */
 	private static final String FOLDER_PATH = "icons/file_s.png";
-	
+	/**
+	 * Default constructor
+	 */
 	public ImapAccount() {
 		super();
 	}
-	
+	/**
+	 * Construct new {@link ImapAccount} with icon
+	 * @param account Provided {@link Account}
+	 */
 	public ImapAccount(final Account account) {
 		super(account);
 		this.imagePath = FOLDER_PATH;
 	}
-	
+
+	public Account getAccount() {
+		return account;
+	}
+
 	public boolean hasChildren() {
 		return getChildren().size() > 0;
 	}
-	
+	/**
+	 * Returns list with {@link ImapFolder}
+	 */
 	public List<IMessageTreeItem> getChildren() {
 		final List<IMessageTreeItem> children = new ArrayList<IMessageTreeItem>();
 		for (Folder item : account.getFolders()) {
-				children.add(new ImapFolder(item));
+			children.add(new ImapFolder(item));
 		}
 		return children;
 	}
 
 	@Override
 	public List<Message> getMessages() {
-		final List<Message> messages = new ArrayList<Message>();
-		return messages;
+		return new ArrayList<Message>();
 	}
-	
+
 	public String getName() {
 		return account.getName();
 	}
